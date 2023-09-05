@@ -8,8 +8,8 @@
                 </div>
             @endif
             <x-form method="post" action="login" need-validation>
-                <x-forms.input name="username" type="text" label="Username" required value="lhnmitra29" />
-                <x-forms.input name="password" type="password" label="Password" required value="rahasia" />
+                <x-forms.input name="email" type="text" label="Email" required value="dpupurbalingga@gmail.com" />
+                <x-forms.input name="password" type="password" label="Password" required value="purbalingga123" />
                 <x-button color="primary" type="submit">Login</x-button>
             </x-form>
         </x-card>

@@ -27,5 +27,9 @@ Route::post('logout', [AuthController::class, 'logoutProcess']);
 
 Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/table', [DashboardController::class, 'table']);
+    Route::get('/laporan/status-jalan', [DashboardController::class, 'statusJalan']);
+    Route::get('/laporan/kasus-jalan', [DashboardController::class, 'kasusJalan']);
+    Route::get('/kelola-ai', [DashboardController::class, 'kelolaAi']);
+    Route::get('/kelola-user', [DashboardController::class, 'kelolaUser']);
+    Route::get('/kelola-peta', [DashboardController::class, 'kelolaPeta']);
 });

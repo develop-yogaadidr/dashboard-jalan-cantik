@@ -29,7 +29,5 @@ class AuthController extends Controller
         }else{
             return redirect('dashboard');
         }
-
-        var_dump($response);
     }
 }

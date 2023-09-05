@@ -4,6 +4,6 @@ namespace App\Models\Dtos;
 
 class LoginRequestDto
 {
-    public $username;
+    public $email;
     public $password;
 }

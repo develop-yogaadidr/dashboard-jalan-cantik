@@ -16,7 +16,6 @@ class BaseRepository implements IBaseRepository
             $token = $auth->access_token;
             $this->token = $token;
         }
-
         $this->base_url = env('SERVER_URL', 'http://localhost/api') . $path;
     }
 
