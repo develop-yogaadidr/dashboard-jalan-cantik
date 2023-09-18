@@ -15,7 +15,7 @@ class ServiceBase
         $responseDto->message = $responseBody->message ?? "";
 
         if ($response->ok()) {
-            $responseDto->data = $responseBody;
+            $responseDto->body = $responseBody;
         }
 
         return $responseDto;

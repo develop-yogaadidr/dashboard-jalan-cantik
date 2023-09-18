@@ -12,7 +12,7 @@ class AuthController extends Controller
         $service = new AuthService;
         $response = $service->login($request);
 
-        if ($response->status_code == 200) {
+        if ($response->ok()) {
             return redirect('dashboard');
         }else{
             return redirect('login');
@@ -24,7 +24,7 @@ class AuthController extends Controller
         $service = new AuthService;
         $response = $service->logout($request);
 
-        if ($response->status_code == 200) {
+        if ($response->ok()) {
             return redirect('/');
         }else{
             return redirect('dashboard');

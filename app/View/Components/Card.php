@@ -12,7 +12,7 @@ class Card extends Component
      * @return void
      */
 
-    public function __construct(public string $title, public string $type = '', public string $image = '')
+    public function __construct(public string $title = '', public string $type = '', public string $image = '')
     {
         //
     }

@@ -16,6 +16,7 @@ class Input extends Component
         public string $type,
         public string $label = '',
         public string $value = '',
+        public string $description = '',
         public bool $required = false
     ) { }
 

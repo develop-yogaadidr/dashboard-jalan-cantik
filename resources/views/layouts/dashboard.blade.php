@@ -20,7 +20,17 @@
                             For more information about DataTables, please visit the <a target="_blank"
                                 href="https://datatables.net">official DataTables documentation</a>.</p>
                     @endif
+                    @if (session('warning'))
+                        <div class="alert alert-warning">
+                            {{ session('warning') }}
+                        </div>
+                    @endif
 
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
                     @yield('content')
 

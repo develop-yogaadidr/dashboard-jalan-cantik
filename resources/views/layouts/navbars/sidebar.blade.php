@@ -39,6 +39,23 @@ $menu = [
                 'name' => 'Kelola User',
                 'target' => 'dashboard/kelola-user',
                 'icon' => 'fa-users',
+                'sub-items' => [
+                    [
+                        'id' => 'daftar-user',
+                        'name' => 'Daftar User',
+                        'target' => 'dashboard/daftar-user',
+                    ],
+                    [
+                        'id' => 'user-admin',
+                        'name' => 'User Admin',
+                        'target' => 'dashboard/daftar-user/admin',
+                    ],
+                    [
+                        'id' => 'user-pelapor',
+                        'name' => 'User Pelapor',
+                        'target' => 'dashboard/daftar-user/pelapor',
+                    ],
+                ]
             ],
             [
                 'id' => 'kelola-peta',

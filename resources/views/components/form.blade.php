@@ -1,5 +1,4 @@
-<form method="{{ $method }}" action="{{ $action }}"
-    class="row g-3 @if ($needValidation == true) needs-validation @endif" novalidate>
+<form method="{{ $method }}" {{ $attributes->merge(['class' => '', 'style' => '']) }} action="{{ $action }}" @if ($needValidation == true) needs-validation @endif" novalidate>
     @csrf
     {{ $slot }}
 </form>

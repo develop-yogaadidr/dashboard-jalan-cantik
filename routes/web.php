@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureSessionIsValid;
 use Illuminate\Support\Facades\Route;
 
@@ -23,13 +25,16 @@ Route::get('/', function () {
 Route::view('login', 'pages.login', ["title" => "Login"])->name("login");
 
 Route::post('login', [AuthController::class, 'loginProcess']);
-Route::post('logout', [AuthController::class, 'logoutProcess']);
 
 Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
+    Route::post('logout', [AuthController::class, 'logoutProcess']);
     Route::get('/laporan/status-jalan', [DashboardController::class, 'statusJalan']);
     Route::get('/laporan/kasus-jalan', [DashboardController::class, 'kasusJalan']);
-    Route::get('/kelola-ai', [DashboardController::class, 'kelolaAi']);
-    Route::get('/kelola-user', [DashboardController::class, 'kelolaUser']);
+    Route::get('/kelola-ai', [ConfigController::class, 'kelolaAi']);
     Route::get('/kelola-peta', [DashboardController::class, 'kelolaPeta']);
+    Route::post('/update-ai', [ConfigController::class, 'updateAi']);
+    Route::get('/daftar-user', [UserController::class, 'index']);
+
+    Route::get('/data/user', [UserController::class, 'getUserData']);
 });

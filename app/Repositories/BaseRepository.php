@@ -42,7 +42,7 @@ class BaseRepository implements IBaseRepository
 
     public function update($id, $entity)
     {
-        $response = Http::withToken($this->token)->put($this->base_url . '/' . $id);
+        $response = Http::withToken($this->token)->put($this->base_url . '/' . $id, $entity);
 
         return $response;
     }

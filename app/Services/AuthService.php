@@ -19,7 +19,7 @@ class AuthService extends ServiceBase
         $responseDto = $this->buildResponse($repository->auth($dto));
 
         if ($responseDto->ok()) {
-            $request->session()->put('auth', $responseDto->data);
+            $request->session()->put('auth', $responseDto->body);
         }
 
         return $responseDto;
