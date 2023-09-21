@@ -35,6 +35,11 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/kelola-peta', [DashboardController::class, 'kelolaPeta']);
     Route::post('/update-ai', [ConfigController::class, 'updateAi']);
     Route::get('/daftar-user', [UserController::class, 'index']);
+    Route::get('/daftar-user/admin', [UserController::class, 'getUserAdmin']);
+    Route::get('/daftar-user/pelapor', [UserController::class, 'getUserPelapor']);
+    Route::get('/detail-user/{id}', [UserController::class, 'getUserById']);
 
     Route::get('/data/user', [UserController::class, 'getUserData']);
+    Route::get('/data/user/admin', [UserController::class, 'getUserDataAdmin']);
+    Route::get('/data/user/pelapor', [UserController::class, 'getUserDataPelapor']);
 });

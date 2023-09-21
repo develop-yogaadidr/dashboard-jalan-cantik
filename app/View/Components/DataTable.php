@@ -11,7 +11,7 @@ class DataTable extends Component
      *
      * @return void
      */
-    public function __construct(public string $url, public string $columns)
+    public function __construct(public string $id)
     {
         //
     }

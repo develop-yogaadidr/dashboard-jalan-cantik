@@ -12,13 +12,53 @@ class UserController extends Controller
     {
         $url = URL::to('/') . "/dashboard/data/user";
 
-        return view('pages.dashboard.daftar-user', ["title" => "Daftar User", "active_menu" => "kelola-user", "url" => $url]);
+        return view('pages.dashboard.daftar-user', ["title" => "Daftar User", "active_menu" => "daftar-user", "url" => $url]);
     }
+
+    public function getUserAdmin(Request $request)
+    {
+        $url = URL::to('/') . "/dashboard/data/user/admin";
+
+        return view('pages.dashboard.daftar-user', ["title" => "Daftar User", "active_menu" => "user-admin", "url" => $url]);
+    }
+
+    public function getUserPelapor(Request $request)
+    {
+        $url = URL::to('/') . "/dashboard/data/user/pelapor";
+
+        return view('pages.dashboard.daftar-user', ["title" => "Daftar User", "active_menu" => "user-pelapor", "url" => $url]);
+    }
+
+    public function getUserById(Request $request, $id)
+    {
+        $service = new UserService;
+        $response = $service->getById($id);
+
+        return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response]);
+    }
+
+    // Data Purposes
 
     public function getUserData(Request $request)
     {
         $service = new UserService;
         $users = $service->getAll($request->getQueryString());
+
+        return response()->json($users);
+    }
+
+    public function getUserDataAdmin(Request $request)
+    {
+        $service = new UserService;
+        $users = $service->getByRole("admin", $request->getQueryString());
+
+        return response()->json($users);
+    }
+
+    public function getUserDataPelapor(Request $request)
+    {
+        $service = new UserService;
+        $users = $service->getByRole("pelapor", $request->getQueryString());
 
         return response()->json($users);
     }

@@ -18,7 +18,7 @@
     $(document).ready(function() {
         $(`#myTable`).Tables({
             url: "{{$url}}",
-            columns: ["name", "email", "role"],
+            columns: ["name", "email", "adminrole"],
             buttons: [{
                 button: "detail",
                 action_url: "{{ URL::to('/') }}/dashboard/detail-user"
