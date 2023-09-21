@@ -19,9 +19,9 @@ class BaseRepository implements IBaseRepository
         $this->base_url = env('SERVER_URL', 'http://localhost/api') . $path;
     }
 
-    public function getAllData()
+    public function getAllData($queryString = "")
     {
-        $response = Http::withToken($this->token)->get($this->base_url);
+        $response = Http::withToken($this->token)->get($this->base_url."?".$queryString);
 
         return $response;
     }

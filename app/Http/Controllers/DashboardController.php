@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ReportService;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {

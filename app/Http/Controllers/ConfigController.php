@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ConfigService;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class ConfigController extends Controller
 {
