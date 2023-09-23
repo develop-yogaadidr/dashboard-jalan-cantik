@@ -16,23 +16,6 @@ class DashboardController extends Controller
         return view('pages.dashboard.index', ["title" => "Laporan Dalam Angka", "active_menu" => "dashboard", "data" => ["status_laporan" => $statusLaporan, "status_jalan" => $statusJalan]]);
     }
 
-    // laporan masuk
-    public function statusJalan(Request $request)
-    {
-        $service = new ReportService;
-        $response = $service->getCounterStatusJalan();
-
-        return view('pages.dashboard.laporan-status', ["title" => "Laporan Masuk Berdasarkan Status Jalan",  "active_menu" => "status-jalan", "data" => $response]);
-    }
-
-    public function kasusJalan(Request $request)
-    {
-        $service = new ReportService;
-        $response = $service->getCounterKasusJalan();
-
-        return view('pages.dashboard.laporan-kasus', ["title" => "Laporan Masuk Berdasarkan Kasus Jalan", "active_menu" => "kasus-jalan", "data" => $response]);
-    }
-
     public function kelolaPeta(Request $request)
     {
         return view('pages.dashboard.under-construction', ["title" => "Kelola Peta", "active_menu" => "kelola-peta"]);

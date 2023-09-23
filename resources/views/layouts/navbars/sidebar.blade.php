@@ -55,6 +55,11 @@ $menu = [
                         'name' => 'User Pelapor',
                         'target' => 'dashboard/daftar-user/pelapor',
                     ],
+                    [
+                        'id' => 'user-role',
+                        'name' => 'User Role',
+                        'target' => 'dashboard/daftar-user/pelapor',
+                    ],
                 ]
             ],
             [

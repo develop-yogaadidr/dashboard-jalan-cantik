@@ -8,7 +8,7 @@ let dataTable = {
 jQuery.fn.extend({
     Tables: function (property) {
         return this.each(function (index, element) {
-            dataTable.url = property.url ?? ""
+            dataTable.url = property.url.replace("&amp;", "&") ?? ""
             dataTable.columns = property.columns ?? []
             dataTable.table_id = $(element).attr('id');
             dataTable.buttons = property.buttons;
@@ -80,7 +80,23 @@ $(document).ready(async function () {
         dataResponse.body.data.forEach((element) => {
             let body = `<tr class="table-content" data-id="${element.id}">`;
             dataTable.columns.forEach(col => {
-                body += `<td>${element[col]}</td>`;
+                // TODO: revisit then
+                let column = col.split(".")
+                let value = column.length == 1 ? element[column[0]] : element[column[0]][column[1]]
+
+                if (!Number.isInteger(value)) {
+                    var date = new Date(value);
+                    if (date instanceof Date && !isNaN(date)) {
+                        value = date.toLocaleDateString();
+                    }
+                }
+
+                let slice = 100;
+                if (typeof value == "string" && value.length > slice) {
+                    value = value.slice(0, slice) + " ..."
+                }
+
+                body += `<td>${value}</td>`;
             })
             body += '</tr>';
             content += body;

@@ -21,14 +21,14 @@ class BaseRepository implements IBaseRepository
 
     public function getAllData($queryString = "")
     {
-        $response = Http::withToken($this->token)->get($this->base_url."?".$queryString);
+        $response = Http::withToken($this->token)->get($this->base_url . "?" . $queryString);
 
         return $response;
     }
 
-    public function getDataById($id)
+    public function getDataById($id, $queryString = "")
     {
-        $response = Http::withToken($this->token)->get($this->base_url . '/' . $id);
+        $response = Http::withToken($this->token)->get($this->base_url . '/' . $id . $queryString);
 
         return $response;
     }

@@ -17,14 +17,14 @@ class UserController extends Controller
 
     public function getUserAdmin(Request $request)
     {
-        $url = URL::to('/') . "/dashboard/data/user/admin";
+        $url = URL::to('/') . "/dashboard/data/user?main_filter[]=role,Admin";
 
         return view('pages.dashboard.daftar-user', ["title" => "Daftar User", "active_menu" => "user-admin", "url" => $url]);
     }
 
     public function getUserPelapor(Request $request)
     {
-        $url = URL::to('/') . "/dashboard/data/user/pelapor";
+        $url = URL::to('/') . "/dashboard/data/user?main_filter[]=role,User";
 
         return view('pages.dashboard.daftar-user', ["title" => "Daftar User", "active_menu" => "user-pelapor", "url" => $url]);
     }
