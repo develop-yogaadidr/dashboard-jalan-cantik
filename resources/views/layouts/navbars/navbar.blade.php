@@ -49,7 +49,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 
-                    <x-form method="post" action="logout" need-validation>
+                    <x-form method="post" action="{{ URL::to('/') }}/dashboard/logout" need-validation>
                         <x-button color="primary" style="margin-top:0" type="submit">Logout</x-button>
                     </x-form>
                 </div>

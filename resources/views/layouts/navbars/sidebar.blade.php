@@ -77,7 +77,7 @@ $menu = [
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ URL::to('/') }}/dashboard">
         <div class="sidebar-brand-icon">
             <img style="width:30px" src="{{ URL::to('/') }}/public/images/jalan-cantik.png" />
         </div>

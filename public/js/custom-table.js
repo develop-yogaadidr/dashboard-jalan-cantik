@@ -2,22 +2,23 @@ let dataTable = {
     url: "",
     columns: [],
     table_id: "",
+    entity: "",
     buttons: []
 }
 
 jQuery.fn.extend({
     Tables: function (property) {
         return this.each(function (index, element) {
-            dataTable.url = property.url.replace("&amp;", "&") ?? ""
+            dataTable.url = property.url ?? ""
             dataTable.columns = property.columns ?? []
             dataTable.table_id = $(element).attr('id');
+            dataTable.entity = property.entity ?? "";
             dataTable.buttons = property.buttons;
         });
     }
 });
 
 $(document).ready(async function () {
-
     let search = "";
     let page = "page=1";
     let selected_id = -1;
@@ -55,9 +56,25 @@ $(document).ready(async function () {
     function generateSerach(value) {
         if (value == undefined) return;
 
+        if(value == ""){
+            search = "";
+            loadData();
+            return;
+        }
+
         let filters = [];
         dataTable.columns.forEach(col => {
-            filters.push(`filter[]=${col},${value},OR`)
+            if (col == "increment") {
+                return;
+            }
+
+            if (col.indexOf(".") == -1) {
+                let col_name = dataTable.entity == "" ? col : `${dataTable.entity}.${col}`
+                filters.push(`filter[]=${col_name},${value},OR`)
+            } else {
+                let words = col.split(".");
+                filters.push(`where_has[]=${words[0]},${words[1]},${value},OR`)
+            }
         })
 
         search = filters.join("&");
@@ -71,18 +88,20 @@ $(document).ready(async function () {
         if (dataResponse.body.data.length == 0) {
             $(`#${dataTable.table_id} tbody`).html(`
             <tr>
-                <td colspan="3" align="center">Tidak ditemukan data</td>
+                <td colspan="${dataTable.columns.length}" align="center">Tidak ditemukan data</td>
             </tr>
             `);
             return;
         }
 
-        dataResponse.body.data.forEach((element) => {
+        let startNumber = dataResponse.body.from;
+        dataResponse.body.data.forEach((element, index) => {
             let body = `<tr class="table-content" data-id="${element.id}">`;
             dataTable.columns.forEach(col => {
                 // TODO: revisit then
                 let column = col.split(".")
-                let value = column.length == 1 ? element[column[0]] : element[column[0]][column[1]]
+                let value = col == "increment" ? startNumber + index :
+                    column.length == 1 ? element[column[0]] : element[column[0]][column[1]]
 
                 if (!Number.isInteger(value)) {
                     var date = new Date(value);

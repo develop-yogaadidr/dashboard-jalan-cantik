@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CityService;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -42,9 +43,27 @@ class LaporanController extends Controller
 
     public function daftarLaporanByKasusJalan(Request $request, $kasus)
     {
-        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=type," . $kasus;
+        $selected_year = $request->selected_year ?? "all";
+        $selected_status = $request->selected_status ?? "all";
+        $selected_city = $request->selected_city ?? "all";
 
-        return view('pages.dashboard.daftar-laporan', ["title" => "Daftar Laporan " . $kasus, "active_menu" => "kasus-jalan",  "url" => $url]);
+        $city_service = new CityService;
+        $cities = $city_service->getAll();
+
+        $filter_year = $selected_year == "all" ? "" : "&period=" . $selected_year;
+        $filter_status = $selected_status == "all" ? "" : "&main_filter[]=status," . $selected_status;
+        $filter_city = $selected_city == "all" ? "" : "&main_filter[]=city_id," . $selected_city;
+
+        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=type," . $kasus . $filter_status . $filter_city . $filter_year;
+
+        return view('pages.dashboard.daftar-laporan-kasus', [
+            "title" => "Daftar Laporan " . $kasus, "active_menu" => "kasus-jalan",  "url" => $url,
+            "filter" => [
+                "selected_year" => $selected_year,
+                "selected_status" => $selected_status,
+                "selected_city" => $selected_city,
+            ], "cities" => $cities->body->data
+        ]);
     }
 
     // Data Purposes

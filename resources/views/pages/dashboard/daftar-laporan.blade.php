@@ -3,7 +3,7 @@
 @section('content')
     <x-card>
         <div class="table-responsive">
-            <x-data-table id="myTable" >
+            <x-data-table id="myTable">
                 <thead>
                     <th>No</th>
                     <th>Pelapor</th>
@@ -22,7 +22,8 @@
         $(document).ready(function() {
             $(`#myTable`).Tables({
                 url: "{{ $url }}",
-                columns: ["id", "user.name", "type", "info", "created_at", "status", "status_jalan",
+                entity: "reports",
+                columns: ["increment", "user.name", "type", "info", "created_at", "status", "status_jalan",
                     "city.name"
                 ],
                 buttons: [{

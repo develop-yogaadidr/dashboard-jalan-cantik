@@ -18,8 +18,9 @@ class ConfigController extends Controller
     public function updateAi(Request $request)
     {
         $service = new ConfigService;
-        $input = $request::post();
+        $input = $request->all();
         array_shift($input);
+        var_dump($input);
 
         $response = $service->updateBatch($input);
 
