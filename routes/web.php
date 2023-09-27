@@ -35,6 +35,7 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/laporan/kasus-jalan', [LaporanController::class, 'kasusJalan']);
     Route::get('/laporan/status-jalan/{status}', [LaporanController::class, 'daftarLaporanByStatusJalan']);
     Route::get('/laporan/kasus-jalan/{kasus}', [LaporanController::class, 'daftarLaporanByKasusJalan']);
+    Route::get('/laporan/status/{status}', [LaporanController::class, 'daftarLaporanByStatus']);
     Route::get('/laporan/{id}', [LaporanController::class, 'detailLaporan']);
 
 
@@ -45,7 +46,9 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/daftar-user', [UserController::class, 'index']);
     Route::get('/daftar-user/admin', [UserController::class, 'getUserAdmin']);
     Route::get('/daftar-user/pelapor', [UserController::class, 'getUserPelapor']);
+    Route::get('/daftar-role-admin', [UserController::class, 'getAdminRoles']);
     Route::get('/detail-user/{id}', [UserController::class, 'getUserById']);
+    Route::get('/detail-role-admin/{id}', [UserController::class, 'getAdminRoleById']);
 
     // Only data purposes
     Route::get('/data/laporan', [LaporanController::class, 'getDataLaporan']);
@@ -53,4 +56,5 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/data/user', [UserController::class, 'getUserData']);
     Route::get('/data/user/admin', [UserController::class, 'getUserDataAdmin']);
     Route::get('/data/user/pelapor', [UserController::class, 'getUserDataPelapor']);
+    Route::get('/data/role-admin', [UserController::class, 'getAdminRolesData']);
 });

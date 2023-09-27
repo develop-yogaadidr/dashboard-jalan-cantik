@@ -71,7 +71,7 @@
             <x-card title="Foto Pelapor" class="col">
                 <div class="row">
                     @foreach ($foto_pelapor as $photo)
-                        <div class="col">
+                        <div class="col-4">
                             <img src="{{ $image_url . $photo }}" class="w-100 shadow-1-strong rounded mb-4"
                                 alt="Boat on Calm Water" />
                         </div>
@@ -82,9 +82,14 @@
         <div class="col-6">
             <x-card title="Foto Selesai" class="col">
                 <div class="row">
+                    @if (sizeof($foto_selesai) == 0)
+                        <div class="alert alert-light" role="alert">
+                            Foto belum diunggah
+                        </div>
+                    @endif
                     @foreach ($foto_selesai as $photo)
-                        <div class="col">
-                             <img src="{{ $image_url . $photo }}" class="w-100 shadow-1-strong rounded mb-4"
+                        <div class="col-4">
+                            <img src="{{ $image_url . $photo }}" class="w-100 shadow-1-strong rounded mb-4"
                                 alt="Boat on Calm Water" />
                         </div>
                     @endforeach

@@ -12,7 +12,18 @@ class ConfigController extends Controller
         $service = new ConfigService;
         $response = $service->getAll();
 
-        return view('pages.dashboard.konfigurasi-ai', ["title" => "Kelola AI", "active_menu" => "kelola-ai", "data" => $response]);
+        $breadcrumbs = [
+            [
+                "label" => 'Dashboard',
+                'link' => '/dashboard'
+            ],
+            [
+                "label" => 'Kelola AI ',
+                'link' => ''
+            ]
+        ];
+
+        return view('pages.dashboard.konfigurasi-ai', ["title" => "Kelola AI", "active_menu" => "kelola-ai", "breadcrumbs" => $breadcrumbs, "data" => $response]);
     }
 
     public function updateAi(Request $request)

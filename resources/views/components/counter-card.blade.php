@@ -12,8 +12,10 @@
         @endif
         <h6>{{ $title }}</h6>
         @if ($target != '')
-            <a href="{{ $target }}" class="card-link">Lihat Detail</a>
+            <a class="" href="{{ $target }}" class="card-link">Lihat Detail</a>
         @endif
+
+        {{ $slot }}
 
     </div>
 </div>

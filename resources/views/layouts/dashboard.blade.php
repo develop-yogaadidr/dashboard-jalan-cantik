@@ -15,11 +15,26 @@
                         <h1 class="h3 mb-4 text-gray-800">{{ $title }}</h1>
                     @endif
                     @if (isset($description) && $description != '')
-                        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table
-                            below.
-                            For more information about DataTables, please visit the <a target="_blank"
-                                href="https://datatables.net">official DataTables documentation</a>.</p>
+                        <p class="mb-4">{{ $description }}</p>
                     @endif
+                    @if (isset($breadcrumbs) && is_array($breadcrumbs))
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                @foreach ($breadcrumbs as $breadcrumb)
+                                    @if ($breadcrumb['link'] == '')
+                                        <li class="breadcrumb-item active" aria-current="page">{{ $breadcrumb['label'] }}</li>
+                                    @else
+                                        <li class="breadcrumb-item">
+                                            <a href="{{ URL::to('/') . $breadcrumb['link'] }}">
+                                                {{ $breadcrumb['label'] }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        </nav>
+                    @endif
+
                     @if (session('warning'))
                         <div class="alert alert-warning">
                             {{ session('warning') }}

@@ -194,4 +194,76 @@ return [
         // ...
     ])->toArray(),
 
+    'menu' => [
+        [
+            'header-name' => '',
+            'items' => [
+                [
+                    'id' => 'dashboard',
+                    'name' => 'Dashboard',
+                    'target' => 'dashboard',
+                    'icon' => 'fa-tachometer-alt',
+                ],
+                [
+                    'id' => 'laporan-masuk',
+                    'name' => 'Laporan Masuk',
+                    'target' => '',
+                    'icon' => 'fa-file',
+                    'sub-items' => [
+                        [
+                            'id' => 'status-jalan',
+                            'name' => 'Status Jalan',
+                            'target' => 'dashboard/laporan/status-jalan',
+                        ],
+                        [
+                            'id' => 'kasus-jalan',
+                            'name' => 'Kasus Jalan',
+                            'target' => 'dashboard/laporan/kasus-jalan',
+                        ],
+                    ],
+                ],
+                [
+                    'id' => 'kelola-ai',
+                    'name' => 'Kelola AI',
+                    'target' => 'dashboard/kelola-ai',
+                    'icon' => 'fa-microchip',
+                ],
+                [
+                    'id' => 'kelola-user',
+                    'name' => 'Kelola User',
+                    'target' => 'dashboard/kelola-user',
+                    'icon' => 'fa-users',
+                    'sub-items' => [
+                        [
+                            'id' => 'daftar-user',
+                            'name' => 'Daftar User',
+                            'target' => 'dashboard/daftar-user',
+                        ],
+                        [
+                            'id' => 'user-admin',
+                            'name' => 'User Admin',
+                            'target' => 'dashboard/daftar-user/admin',
+                        ],
+                        [
+                            'id' => 'user-pelapor',
+                            'name' => 'User Pelapor',
+                            'target' => 'dashboard/daftar-user/pelapor',
+                        ],
+                        [
+                            'id' => 'admin-role',
+                            'name' => 'Role Admin',
+                            'target' => 'dashboard/daftar-role-admin',
+                        ],
+                    ]
+                ],
+                [
+                    'id' => 'kelola-peta',
+                    'name' => 'Kelola Peta Jalan',
+                    'target' => 'dashboard/kelola-peta',
+                    'icon' => 'fa-map',
+                ],
+            ],
+        ],
+    ]
+
 ];
