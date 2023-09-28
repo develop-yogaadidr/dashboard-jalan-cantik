@@ -39,7 +39,7 @@ class UserController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.daftar-user', ["title" => "Daftar User Admin", "active_menu" => "user-admin", "url" => $url]);
+        return view('pages.dashboard.daftar-user', ["title" => "Daftar User Admin", "active_menu" => "user-admin", 'breadcrumbs' => $breadcrumbs,  "url" => $url]);
     }
 
     public function getUserPelapor(Request $request)
@@ -56,24 +56,24 @@ class UserController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.daftar-user', ["title" => "Daftar User Pelapor", "active_menu" => "user-pelapor", "url" => $url]);
+        return view('pages.dashboard.daftar-user', ["title" => "Daftar User Pelapor", "active_menu" => "user-pelapor", 'breadcrumbs' => $breadcrumbs, "url" => $url]);
     }
 
-    public function getAdminRoles(Request $request)
+    public function getLevelAdmins(Request $request)
     {
-        $url = URL::to('/') . "/dashboard/data/role-admin?join_count=admin_city";
+        $url = URL::to('/') . "/dashboard/data/level-admin?join_count=admin_city";
         $breadcrumbs = [
             [
                 "label" => 'Dashboard',
                 'link' => '/dashboard'
             ],
             [
-                "label" => 'Daftar Role Admin',
+                "label" => 'Daftar Level Admin',
                 'link' => ''
             ]
         ];
 
-        return view('pages.dashboard.daftar-role-admin', ["title" => "Daftar Admin Role", "active_menu" => "admin-role", "url" => $url]);
+        return view('pages.dashboard.daftar-level-admin', ["title" => "Daftar Admin Role", "active_menu" => "level-admin", 'breadcrumbs' => $breadcrumbs,  "url" => $url]);
     }
 
     public function getUserById(Request $request, $id)
@@ -84,12 +84,12 @@ class UserController extends Controller
         return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response]);
     }
 
-    public function getAdminRoleById(Request $request, $id)
+    public function getLevelAdminById(Request $request, $id)
     {
         $service = new UserService;
-        $response = $service->getAdminRoleById($id);
+        $response = $service->getLevelAdminById($id);
 
-        return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "admin-role", "data" => $response]);
+        return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "level-admin", "data" => $response]);
     }
 
     // Data Purposes
@@ -118,10 +118,10 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-    public function getAdminRolesData(Request $request)
+    public function getLevelAdminsData(Request $request)
     {
         $service = new UserService;
-        $users = $service->getAllAdminRole($request->getQueryString());
+        $users = $service->getAllLevelAdmin($request->getQueryString());
 
         return response()->json($users);
     }

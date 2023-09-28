@@ -2,9 +2,7 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\Http;
-
-class AdminRoleRepository extends BaseRepository
+class LevelAdminRepository extends BaseRepository
 {
     public function __construct()
     {

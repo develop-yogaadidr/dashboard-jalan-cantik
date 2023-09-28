@@ -250,9 +250,9 @@ return [
                             'target' => 'dashboard/daftar-user/pelapor',
                         ],
                         [
-                            'id' => 'admin-role',
-                            'name' => 'Role Admin',
-                            'target' => 'dashboard/daftar-role-admin',
+                            'id' => 'level-admin',
+                            'name' => 'Level Admin',
+                            'target' => 'dashboard/daftar-level-admin',
                         ],
                     ]
                 ],

@@ -20,7 +20,7 @@
             columns: ["name", "admin_city_count"],
             buttons: [{
                 button: "detail",
-                action_url: "{{ URL::to('/') }}/dashboard/detail-admin-role"
+                action_url: "{{ URL::to('/') }}/dashboard/detail-level-admin"
             }]
         });
     })

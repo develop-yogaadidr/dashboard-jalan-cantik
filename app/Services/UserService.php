@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\AdminRoleRepository;
+use App\Repositories\LevelAdminRepository;
 use App\Repositories\UserRepository;
 
 class UserService extends ServiceBase
@@ -31,17 +31,17 @@ class UserService extends ServiceBase
         return $responseDto;
     }
 
-    public function getAllAdminRole($queryString = "")
+    public function getAllLevelAdmin($queryString = "")
     {
-        $repository = new AdminRoleRepository();
+        $repository = new LevelAdminRepository();
         $responseDto = $this->buildResponse($repository->getAllData($queryString));
 
         return $responseDto;
     }
 
-    public function getAdminRoleById($id)
+    public function getLevelAdminById($id)
     {
-        $repository = new AdminRoleRepository();
+        $repository = new LevelAdminRepository();
         $responseDto = $this->buildResponse($repository->getDataById($id));
 
         return $responseDto;
