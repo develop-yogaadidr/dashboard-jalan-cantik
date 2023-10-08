@@ -31,7 +31,6 @@ class ConfigController extends Controller
         $service = new ConfigService;
         $input = $request->all();
         array_shift($input);
-        var_dump($input);
 
         $response = $service->updateBatch($input);
 

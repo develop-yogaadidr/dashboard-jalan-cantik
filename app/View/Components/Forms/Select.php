@@ -11,8 +11,13 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        public string $name,
+        public string $label = '',
+        public string $value = '',
+        public string $description = '',
+        public bool $required = false
+    ) {
         //
     }
 

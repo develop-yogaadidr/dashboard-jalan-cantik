@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Dtos\UpdateAdminRequestDto;
 use App\Repositories\LevelAdminRepository;
 use App\Repositories\UserRepository;
 
@@ -43,6 +44,23 @@ class UserService extends ServiceBase
     {
         $repository = new LevelAdminRepository();
         $responseDto = $this->buildResponse($repository->getDataById($id));
+
+        return $responseDto;
+    }
+
+    public function update($input)
+    {
+        $dto = new UpdateAdminRequestDto();
+        $id = $input['id'];
+        $dto->name = $input['name'];
+        $dto->email = $input['email'];
+        $dto->role = $input['role'];
+        $dto->admin_role_id = $input['admin_role_id'];
+        
+        var_dump($dto);
+
+        $repository = new UserRepository();
+        $responseDto = $this->buildResponse($repository->update($id, $dto));
 
         return $responseDto;
     }

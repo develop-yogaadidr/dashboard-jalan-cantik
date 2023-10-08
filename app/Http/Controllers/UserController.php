@@ -81,7 +81,25 @@ class UserController extends Controller
         $service = new UserService;
         $response = $service->getById($id);
 
-        return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response]);
+        if ($response->body->role == "User") {
+            return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response]);
+        } else {
+            $roles = $service->getAllLevelAdmin("per_page=all");
+            return view('pages.dashboard.detail-user-admin', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response, "roles" => $roles]);
+        }
+    }
+
+    public function updateUserAdmin(Request $request)
+    {
+        $input = $request->all();
+        $service = new UserService;
+        $response = $service->update($input);
+
+        if (!$response->ok()) {
+            return redirect()->back()->with('warning', $response->message);
+        }
+
+        return redirect()->back()->with('success', "Admin berhasil diubah");
     }
 
     public function getLevelAdminById(Request $request, $id)
@@ -121,8 +139,8 @@ class UserController extends Controller
     public function getLevelAdminsData(Request $request)
     {
         $service = new UserService;
-        $users = $service->getAllLevelAdmin($request->getQueryString());
+        $roles = $service->getAllLevelAdmin($request->getQueryString());
 
-        return response()->json($users);
+        return response()->json($roles);
     }
 }
