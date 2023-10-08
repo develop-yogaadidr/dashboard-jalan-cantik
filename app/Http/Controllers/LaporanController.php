@@ -74,7 +74,7 @@ class LaporanController extends Controller
 
         $status = str_replace("-", "/", $status);
 
-        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=status_jalan," . $status . $filter['year'] . $filter['city'] . $filter['year'];
+        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=status_jalan," . $status . $filter['year'] . $filter['city'] . $filter['status'];
 
         return view('pages.dashboard.daftar-laporan', [
             "title" => "Daftar Laporan " . $status, "active_menu" => "status-jalan", 'breadcrumbs' => $breadcrumbs,  "url" => $url,
@@ -89,7 +89,7 @@ class LaporanController extends Controller
         $cities = $city_service->getAll();
         $breadcrumbs = $this->detailBreadcrumbs('Kasus Jalan', '/dashboard/laporan/kasus-jalan');
 
-        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=type," . $kasus . $filter['year'] . $filter['city'] . $filter['year'];
+        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=type," . $kasus . $filter['year'] . $filter['city'] . $filter['status'];
 
         return view('pages.dashboard.daftar-laporan', [
             "title" => "Daftar Laporan " . $kasus, "active_menu" => "kasus-jalan", 'breadcrumbs' => $breadcrumbs,  "url" => $url,
@@ -118,7 +118,7 @@ class LaporanController extends Controller
             ],
         ];
 
-        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=status," . $status . $filter['year'] . $filter['city'] . $filter['year'];
+        $url = URL::to('/') . "/dashboard/data/laporan?join=city,user&main_filter[]=status," . $status . $filter['year'] . $filter['city'] . $filter['status'];
 
         return view('pages.dashboard.daftar-laporan', [
             "title" => "Daftar Laporan ", "active_menu" => "dashboard", 'breadcrumbs' => $breadcrumbs,  "url" => $url,

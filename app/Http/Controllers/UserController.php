@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CityService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -106,9 +107,24 @@ class UserController extends Controller
     {
         $service = new UserService;
         $response = $service->getLevelAdminById($id);
+        $cities = $service->getLevelAdminCities($id);
 
-        return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "level-admin", "data" => $response]);
+        return view('pages.dashboard.detail-level-admin', ["title" => "Detail Level Admin", "active_menu" => "level-admin", "data" => $response, 'cities' => $cities]);
     }
+
+    public function updateLevelAdmin(Request $request)
+    {
+        $input = $request->all();
+        $service = new UserService;
+        $response = $service->updateLevelAdminDetail($input);
+
+        if (!$response->ok()) {
+            return redirect()->back()->with('warning', $response->message);
+        }
+
+        return redirect()->back()->with('success', "Data berhasil diubah");
+    }
+    
 
     // Data Purposes
 

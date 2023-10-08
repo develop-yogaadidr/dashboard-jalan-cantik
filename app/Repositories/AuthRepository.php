@@ -19,6 +19,13 @@ class AuthRepository extends BaseRepository
         return $response;
     }
 
+    public function profile()
+    {
+        $response = Http::withToken($this->token)->get($this->base_url . '/profile');
+
+        return $response;
+    }
+
     public function refresh()
     {
         $response = Http::withToken($this->token)->post($this->base_url . '/refresh');

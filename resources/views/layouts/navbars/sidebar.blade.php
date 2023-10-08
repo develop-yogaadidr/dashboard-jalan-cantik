@@ -1,8 +1,7 @@
-<?php
-
-$menu = config('app.menu');
-
-?>
+@php
+    $menu = config('app.menu');
+    $profile = session('profile');
+@endphp
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">

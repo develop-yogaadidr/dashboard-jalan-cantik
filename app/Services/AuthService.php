@@ -20,7 +20,18 @@ class AuthService extends ServiceBase
 
         if ($responseDto->ok()) {
             $request->session()->put('auth', $responseDto->body);
+
+            $profile = $this->profile();
+            $request->session()->put('profile', $profile->body);
         }
+
+        return $responseDto;
+    }
+
+    public function profile()
+    {
+        $repository = new AuthRepository();
+        $responseDto = $this->buildResponse($repository->profile());
 
         return $responseDto;
     }
@@ -32,6 +43,7 @@ class AuthService extends ServiceBase
 
         if ($responseDto->ok()) {
             $request->session()->forget('auth');
+            $request->session()->forget('profile');
         }
 
         return $responseDto;

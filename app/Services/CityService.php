@@ -13,4 +13,12 @@ class CityService extends ServiceBase
 
         return $responseDto;
     }
+
+    public function getAllCities($queryString = "")
+    {
+        $repository = new CityRepository();
+        $responseDto = $this->buildResponse($repository->getAllCities($queryString));
+
+        return $responseDto;
+    }
 }

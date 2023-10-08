@@ -49,6 +49,7 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/daftar-level-admin', [UserController::class, 'getLevelAdmins']);
     Route::post('/detail-user/simpan', [UserController::class, 'updateUserAdmin']);
     Route::get('/detail-user/{id}', [UserController::class, 'getUserById']);
+    Route::post('/detail-level-admin/simpan', [UserController::class, 'updateLevelAdmin']);
     Route::get('/detail-level-admin/{id}', [UserController::class, 'getLevelAdminById']);
 
     // Only data purposes
