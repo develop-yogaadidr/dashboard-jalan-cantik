@@ -10,7 +10,8 @@
             <input type="text" class="form-control mb-2" id="table-search" placeholder="Cari">
         </div>
         <div id="table-button-container" class="col-auto">
-            <button type="button" id="table-search-button" class="btn btn-primary mb-2"><i class="fas fa-fw fa-search"></i> Cari</button>
+            <button type="button" id="table-search-button" class="btn btn-primary mb-2"><i
+                    class="fas fa-fw fa-search"></i> Cari</button>
             <button type="button" id="table-detail-button" class="btn btn-info mb-2 table-action-button" disabled
                 style="display:none"><i class="fas fa-fw fa-eye"></i> Detail</button>
         </div>
@@ -18,14 +19,17 @@
     <table id="{{ $id }}" class="display table table-striped table-hover" style="width:100%">
         {{ $slot }}
     </table>
-
-    <div id="table-pagination">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><button class="page-link ">Previous</button></li>
-                <li class="page-item"><button class="page-link ">...</button></li>
-                <li class="page-item"><button class="page-link ">Next</button></li>
-            </ul>
-        </nav>
+    <div class="row">
+        <div class="col" id="table-pagination">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><button class="page-link ">Previous</button></li>
+                    <li class="page-item"><button class="page-link ">...</button></li>
+                    <li class="page-item"><button class="page-link ">Next</button></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col text-right" id="table-information">
+        </div>
     </div>
 </div>

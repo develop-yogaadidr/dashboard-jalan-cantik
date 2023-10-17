@@ -58,8 +58,7 @@
             $(`#myTable`).Tables({
                 url: url,
                 entity: "reports",
-                columns: ["increment", "user.name", "type", "info", "created_at", "status", "status_jalan",
-                    "city.name"
+                columns: ["increment", "users.name", "type", "info", "reports.created_at", "status", "status_jalan","cities.name"
                 ],
                 buttons: [{
                     button: "detail",

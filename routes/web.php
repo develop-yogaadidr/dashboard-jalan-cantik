@@ -35,7 +35,7 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/laporan/kasus-jalan', [LaporanController::class, 'kasusJalan']);
     Route::get('/laporan/status-jalan/{status}', [LaporanController::class, 'daftarLaporanByStatusJalan']);
     Route::get('/laporan/kasus-jalan/{kasus}', [LaporanController::class, 'daftarLaporanByKasusJalan']);
-    Route::get('/laporan/status/{status}', [LaporanController::class, 'daftarLaporanByStatus']);
+    Route::get('/laporan/status', [LaporanController::class, 'daftarLaporanByStatus']);
     Route::get('/laporan/{id}', [LaporanController::class, 'detailLaporan']);
 
 

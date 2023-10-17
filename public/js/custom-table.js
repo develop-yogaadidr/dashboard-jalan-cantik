@@ -42,6 +42,7 @@ $(document).ready(async function () {
             loading(false)
             generateBody(response);
             generatePagination(response);
+            generateTableInformation(response);
         }).catch(e => {
             loading(false)
             return;
@@ -68,15 +69,10 @@ $(document).ready(async function () {
                 return;
             }
 
-            if (col.indexOf(".") == -1) {
-                let col_name = dataTable.entity == "" ? col : `${dataTable.entity}.${col}`
-                filters.push(`filter[]=${col_name},${value},OR`)
-            } else {
-                let words = col.split(".");
-                filters.push(`where_has[]=${words[0]},${words[1]},${value},OR`)
-            }
+            filters.push(`filter[]=${col},${value},OR`)
         })
 
+        page = "page=1";
         search = filters.join("&");
 
         loadData();
@@ -99,9 +95,7 @@ $(document).ready(async function () {
             let body = `<tr class="table-content" data-id="${element.id}">`;
             dataTable.columns.forEach(col => {
                 // TODO: revisit then
-                let column = col.split(".")
-                let value = col == "increment" ? startNumber + index :
-                    column.length == 1 ? element[column[0]] : element[column[0]][column[1]]
+                let value = col == "increment" ? startNumber + index : element[col];
 
                 if (!Number.isInteger(value)) {
                     var date = new Date(value);
@@ -168,6 +162,15 @@ $(document).ready(async function () {
                 loadData()
             });
         })
+    }
+
+    function generateTableInformation(dataResponse){
+        console.log(dataResponse);
+        let start = dataResponse.body.from ?? 0;
+        let end = dataResponse.body.to ?? 0;
+        let total = dataResponse.body.total ?? 0;
+        let body = `${start}-${end} of ${total} items`;
+        $("#table-information").html(body);
     }
 
     function generateButtons() {

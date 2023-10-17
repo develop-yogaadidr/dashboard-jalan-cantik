@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CityService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;

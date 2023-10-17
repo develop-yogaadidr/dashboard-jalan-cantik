@@ -15,7 +15,7 @@ class AuthController extends Controller
         if ($response->ok()) {
             return redirect('dashboard');
         }else{
-            return redirect('login');
+            return redirect('login')->with('warning', $response->message);
         }
     }
 

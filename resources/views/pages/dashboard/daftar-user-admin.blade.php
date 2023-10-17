@@ -5,6 +5,7 @@
         <div class="table-responsive">
             <x-data-table id="myTable">
                 <thead>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Role</th>
@@ -19,7 +20,7 @@
             $(`#myTable`).Tables({
                 url: "{{ $url }}",
                 entity: "users",
-                columns: ["name", "email", "adminrole"],
+                columns: ["increment", "name", "email", "adminrole"],
                 buttons: [{
                     button: "detail",
                     action_url: "{{ URL::to('/') }}/dashboard/detail-user"

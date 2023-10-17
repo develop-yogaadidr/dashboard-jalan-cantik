@@ -6,10 +6,10 @@
         if ($label == 'Kabupaten/Kota') {
             return '';
         }
-    
+
         return URL::to('/') . '/dashboard/laporan/status-jalan/' . getLabel($label);
     }
-    
+
     function getLabel($label)
     {
         return str_replace('/', '-', $label);
@@ -21,7 +21,7 @@
         @foreach ($data['status_laporan']->body->details as $item)
             <div class="col">
                 <x-counter-card title="Laporan {{ $item->label }}" count="{{ $item->counter }}"
-                    target="{{ URL::to('/') . '/dashboard/laporan/status/' . getLabel($item->label) }}"></x-counter-card>
+                    target="{{ URL::to('/') . '/dashboard/laporan/status?selected_status=' . getLabel($item->label) }}"></x-counter-card>
             </div>
         @endforeach
     </div>
