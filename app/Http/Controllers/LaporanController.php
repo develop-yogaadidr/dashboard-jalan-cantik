@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dtos\CreateProgressLaporanRequestDto;
 use App\Services\CityService;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
@@ -15,7 +16,30 @@ class LaporanController extends Controller
         $queryString = "?join=user,city,progress";
         $response = $service->getById($id, $queryString);
 
-        return view('pages.dashboard.laporan-detail', ["title" => "Laporan Detail", "active_menu" => "laporan-masuk", "data" => $response]);
+        return view('pages.dashboard.laporan.detail-laporan', ["title" => "Laporan Detail", "active_menu" => "laporan-masuk", "data" => $response]);
+    }
+
+    public function prosesLaporan(Request $request, $id, $status)
+    {
+        $service = new ReportService;
+        $response = $service->getById($id);
+
+        return view('pages.dashboard.laporan.proses-laporan', ["title" => "Laporan " . $status, "active_menu" => "laporan-masuk", "data" => $response, "status" => $status]);
+    }
+
+    public function createProsesLaporan(Request $request, $id, $status)
+    {
+        $service = new ReportService;
+        $request->request->add(['report_id' => $id]);
+        $request->request->add(['status' => $status]);
+
+        $response = $service->createProgress($request);
+
+        if (!$response->ok()) {
+            return redirect()->back()->with('warning', $response->message);
+        }
+
+        return redirect('/dashboard/laporan/'.$id)->with('success', "Laporan berhasil diperbarui");
     }
 
     public function statusJalan(Request $request)
@@ -40,7 +64,7 @@ class LaporanController extends Controller
             ],
         ];
 
-        return view('pages.dashboard.laporan-status', ["title" => "Laporan Masuk Berdasarkan Status Jalan", 'breadcrumbs' => $breadcrumbs, "active_menu" => "status-jalan", "cities" => $cities->body->data, "data" => $response]);
+        return view('pages.dashboard.laporan.daftar-laporan-status', ["title" => "Laporan Masuk Berdasarkan Status Jalan", 'breadcrumbs' => $breadcrumbs, "active_menu" => "status-jalan", "cities" => $cities->body->data, "data" => $response]);
     }
 
     public function kasusJalan(Request $request)
@@ -62,7 +86,7 @@ class LaporanController extends Controller
             ],
         ];
 
-        return view('pages.dashboard.laporan-kasus', ["title" => "Laporan Masuk Berdasarkan Kasus Jalan", 'breadcrumbs' => $breadcrumbs, "active_menu" => "kasus-jalan", "data" => $response]);
+        return view('pages.dashboard.laporan.daftar-laporan-kasus', ["title" => "Laporan Masuk Berdasarkan Kasus Jalan", 'breadcrumbs' => $breadcrumbs, "active_menu" => "kasus-jalan", "data" => $response]);
     }
 
     public function daftarLaporanByStatusJalan(Request $request, $status, $city_id = null)
@@ -76,7 +100,7 @@ class LaporanController extends Controller
 
         $url = URL::to('/') . "/dashboard/data/laporan?main_filter[]=status_jalan," . $status . $filter['year'] . $filter['city'] . $filter['status'];
 
-        return view('pages.dashboard.daftar-laporan', [
+        return view('pages.dashboard.laporan.daftar-laporan', [
             "title" => "Daftar Laporan " . $status, "active_menu" => "status-jalan", 'breadcrumbs' => $breadcrumbs,  "url" => $url,
             "filter" => $filter['selected_data'], "cities" => $cities->body->data
         ]);
@@ -91,7 +115,7 @@ class LaporanController extends Controller
 
         $url = URL::to('/') . "/dashboard/data/laporan?main_filter[]=type," . $kasus . $filter['year'] . $filter['city'] . $filter['status'];
 
-        return view('pages.dashboard.daftar-laporan', [
+        return view('pages.dashboard.laporan.daftar-laporan', [
             "title" => "Daftar Laporan " . $kasus, "active_menu" => "kasus-jalan", 'breadcrumbs' => $breadcrumbs,  "url" => $url,
             "filter" => $filter['selected_data'], "cities" => $cities->body->data
         ]);
@@ -117,9 +141,9 @@ class LaporanController extends Controller
             ],
         ];
 
-        $url = URL::to('/') . "/dashboard/data/laporan?". $filter['year'] . $filter['city'] . $filter['status'];
+        $url = URL::to('/') . "/dashboard/data/laporan?" . $filter['year'] . $filter['city'] . $filter['status'];
 
-        return view('pages.dashboard.daftar-laporan', [
+        return view('pages.dashboard.laporan.daftar-laporan', [
             "title" => "Daftar Laporan ", "active_menu" => "dashboard", 'breadcrumbs' => $breadcrumbs,  "url" => $url,
             "filter" => $filter['selected_data'], "cities" => $cities->body->data
         ]);

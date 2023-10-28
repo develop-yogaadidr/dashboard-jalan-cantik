@@ -47,11 +47,10 @@
                 </div>
                 <div class="modal-body">Apakah anda yakin untuk tetap log out dari aplikasi?</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-
                     <x-form method="post" action="{{ URL::to('/') }}/dashboard/logout" need-validation>
                         <x-button color="primary" style="margin-top:0" type="submit">Logout</x-button>
                     </x-form>
+                    <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Batal</button>
                 </div>
             </div>
         </div>

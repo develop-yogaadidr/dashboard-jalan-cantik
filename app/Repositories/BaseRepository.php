@@ -35,7 +35,7 @@ class BaseRepository implements IBaseRepository
 
     public function create($entity)
     {
-        $response = Http::withToken($this->token)->post($this->base_url);
+        $response = Http::withToken($this->token)->post($this->base_url, $entity);
 
         return $response;
     }

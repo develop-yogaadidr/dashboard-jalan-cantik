@@ -31,13 +31,16 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/', [DashboardController::class, 'index']);
     Route::post('logout', [AuthController::class, 'logoutProcess']);
 
-    Route::get('/laporan/status-jalan', [LaporanController::class, 'statusJalan']);
-    Route::get('/laporan/kasus-jalan', [LaporanController::class, 'kasusJalan']);
-    Route::get('/laporan/status-jalan/{status}', [LaporanController::class, 'daftarLaporanByStatusJalan']);
-    Route::get('/laporan/kasus-jalan/{kasus}', [LaporanController::class, 'daftarLaporanByKasusJalan']);
-    Route::get('/laporan/status', [LaporanController::class, 'daftarLaporanByStatus']);
-    Route::get('/laporan/{id}', [LaporanController::class, 'detailLaporan']);
-
+    Route::prefix("laporan")->group(function () {
+        Route::get('/status-jalan', [LaporanController::class, 'statusJalan']);
+        Route::get('/kasus-jalan', [LaporanController::class, 'kasusJalan']);
+        Route::get('/status-jalan/{status}', [LaporanController::class, 'daftarLaporanByStatusJalan']);
+        Route::get('/kasus-jalan/{kasus}', [LaporanController::class, 'daftarLaporanByKasusJalan']);
+        Route::get('/status', [LaporanController::class, 'daftarLaporanByStatus']);
+        Route::get('/{id}', [LaporanController::class, 'detailLaporan']);
+        Route::get('/{id}/{status}', [LaporanController::class, 'prosesLaporan']);
+        Route::post('/{id}/{status}/create', [LaporanController::class, 'createProsesLaporan']);
+    });
 
     Route::get('/kelola-ai', [ConfigController::class, 'kelolaAi']);
     Route::get('/kelola-peta', [DashboardController::class, 'kelolaPeta']);
@@ -53,10 +56,12 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::get('/detail-level-admin/{id}', [UserController::class, 'getLevelAdminById']);
 
     // Only data purposes
-    Route::get('/data/laporan', [LaporanController::class, 'getDataLaporan']);
 
-    Route::get('/data/user', [UserController::class, 'getUserData']);
-    Route::get('/data/user/admin', [UserController::class, 'getUserDataAdmin']);
-    Route::get('/data/user/pelapor', [UserController::class, 'getUserDataPelapor']);
-    Route::get('/data/level-admin', [UserController::class, 'getLevelAdminsData']);
+    Route::prefix("data")->group(function () {
+        Route::get('/laporan', [LaporanController::class, 'getDataLaporan']);
+        Route::get('/user', [UserController::class, 'getUserData']);
+        Route::get('/user/admin', [UserController::class, 'getUserDataAdmin']);
+        Route::get('/user/pelapor', [UserController::class, 'getUserDataPelapor']);
+        Route::get('/level-admin', [UserController::class, 'getLevelAdminsData']);
+    });
 });

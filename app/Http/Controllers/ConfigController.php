@@ -23,7 +23,7 @@ class ConfigController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.konfigurasi-ai', ["title" => "Kelola AI", "active_menu" => "kelola-ai", "breadcrumbs" => $breadcrumbs, "data" => $response]);
+        return view('pages.dashboard.konfigurasi.konfigurasi-ai', ["title" => "Kelola AI", "active_menu" => "kelola-ai", "breadcrumbs" => $breadcrumbs, "data" => $response]);
     }
 
     public function updateAi(Request $request)

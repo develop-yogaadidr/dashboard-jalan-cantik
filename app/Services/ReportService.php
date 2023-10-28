@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Dtos\CreateProgressLaporanRequestDto;
+use App\Repositories\ProgressReporitory;
 use App\Repositories\ReportRepository;
+use Illuminate\Http\Request;
 
 class ReportService extends ServiceBase
 {
@@ -14,7 +17,7 @@ class ReportService extends ServiceBase
         return $responseDto;
     }
 
-    public function getById($id, $queryString)
+    public function getById($id, $queryString = "")
     {
         $repository = new ReportRepository();
         $responseDto = $this->buildResponse($repository->getDataById($id, $queryString));
@@ -42,6 +45,14 @@ class ReportService extends ServiceBase
     {
         $repository = new ReportRepository();
         $responseDto = $this->buildResponse($repository->getCounterKasusJalan());
+
+        return $responseDto;
+    }
+
+    public function createProgress(Request $request)
+    {
+        $repository = new ProgressReporitory();
+        $responseDto = $this->buildResponse($repository->createProgress($request));
 
         return $responseDto;
     }

@@ -22,7 +22,7 @@ class UserController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.daftar-user', ["title" => "Daftar User", "active_menu" => "daftar-user", 'breadcrumbs' => $breadcrumbs, "url" => $url]);
+        return view('pages.dashboard.users.daftar-user', ["title" => "Daftar User", "active_menu" => "daftar-user", 'breadcrumbs' => $breadcrumbs, "url" => $url]);
     }
 
     public function getUserAdmin(Request $request)
@@ -39,7 +39,7 @@ class UserController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.daftar-user', ["title" => "Daftar User Admin", "active_menu" => "user-admin", 'breadcrumbs' => $breadcrumbs,  "url" => $url]);
+        return view('pages.dashboard.users.daftar-user', ["title" => "Daftar User Admin", "active_menu" => "user-admin", 'breadcrumbs' => $breadcrumbs,  "url" => $url]);
     }
 
     public function getUserPelapor(Request $request)
@@ -56,7 +56,7 @@ class UserController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.daftar-user', ["title" => "Daftar User Pelapor", "active_menu" => "user-pelapor", 'breadcrumbs' => $breadcrumbs, "url" => $url]);
+        return view('pages.dashboard.users.daftar-user', ["title" => "Daftar User Pelapor", "active_menu" => "user-pelapor", 'breadcrumbs' => $breadcrumbs, "url" => $url]);
     }
 
     public function getLevelAdmins(Request $request)
@@ -73,7 +73,7 @@ class UserController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.daftar-level-admin', ["title" => "Daftar Admin Role", "active_menu" => "level-admin", 'breadcrumbs' => $breadcrumbs,  "url" => $url]);
+        return view('pages.dashboard.users.daftar-level-admin', ["title" => "Daftar Admin Role", "active_menu" => "level-admin", 'breadcrumbs' => $breadcrumbs,  "url" => $url]);
     }
 
     public function getUserById(Request $request, $id)
@@ -82,10 +82,10 @@ class UserController extends Controller
         $response = $service->getById($id);
 
         if ($response->body->role == "User") {
-            return view('pages.dashboard.detail-user', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response]);
+            return view('pages.dashboard.users.detail-user', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response]);
         } else {
             $roles = $service->getAllLevelAdmin("per_page=all");
-            return view('pages.dashboard.detail-user-admin', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response, "roles" => $roles]);
+            return view('pages.dashboard.users.detail-user-admin', ["title" => "Detail User", "active_menu" => "kelola-user", "data" => $response, "roles" => $roles]);
         }
     }
 
@@ -108,7 +108,7 @@ class UserController extends Controller
         $response = $service->getLevelAdminById($id);
         $cities = $service->getLevelAdminCities($id);
 
-        return view('pages.dashboard.detail-level-admin', ["title" => "Detail Level Admin", "active_menu" => "level-admin", "data" => $response, 'cities' => $cities]);
+        return view('pages.dashboard.users.detail-level-admin', ["title" => "Detail Level Admin", "active_menu" => "level-admin", "data" => $response, 'cities' => $cities]);
     }
 
     public function updateLevelAdmin(Request $request)
@@ -123,7 +123,6 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', "Data berhasil diubah");
     }
-    
 
     // Data Purposes
 
