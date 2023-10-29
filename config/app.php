@@ -194,7 +194,57 @@ return [
         // ...
     ])->toArray(),
 
-    'menu' => [
+    'public-menu' => [
+        [
+            'id' => "beranda",
+            "name" => "Beranda",
+            "target" => "/"
+        ],
+        [
+            'id' => "tentang",
+            "name" => "Tentang Jalan Cantik",
+            "target" => "tentang-jalan-cantik"
+        ],
+        [
+            'id' => "laporan",
+            "name" => "Laporan",
+            "target" => "",
+            "sub-items" => [
+                [
+                    'id' => "laporan-masuk",
+                    "name" => "Masuk",
+                    "target" => "",
+                ],
+                [
+                    'id' => "laporan-diterima-ai",
+                    "name" => "Diterima AI",
+                    "target" => "",
+                ],
+                [
+                    'id' => "laporan-ditolak-ai",
+                    "name" => "Ditolak AI",
+                    "target" => "",
+                ]
+            ]
+        ],
+        [
+            'id' => "download",
+            "name" => "Download",
+            "target" => "download"
+        ],
+        [
+            'id' => "kontak",
+            "name" => "Kontak",
+            "target" => "kontak"
+        ],
+        [
+            'id' => "privacy",
+            "name" => "Privacy - Policy",
+            "target" => "privacy-policy"
+        ],
+    ],
+
+    'dashboard-menu' => [
         [
             'header-name' => '',
             'items' => [

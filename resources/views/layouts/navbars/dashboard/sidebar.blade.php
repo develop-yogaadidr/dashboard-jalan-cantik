@@ -1,5 +1,5 @@
 @php
-    $menu = config('app.menu');
+    $menu = config('app.dashboard-menu');
     $profile = session('profile');
 @endphp
 

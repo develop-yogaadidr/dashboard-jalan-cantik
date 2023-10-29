@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureSessionIsValid;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.welcome');
-});
+Route::get('/', [PublicController::class, 'index']);
 
-Route::view('login', 'pages.login', ["title" => "Login"])->name("login");
-
+Route::get('login', [AuthController::class, 'login'])->name("login");
 Route::post('login', [AuthController::class, 'loginProcess']);
 
 Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(function () {

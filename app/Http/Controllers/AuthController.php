@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function login(Request $request)
+    {
+        return view('pages.public.login', ["title" => "Login"]);
+    }
+
     public function loginProcess(Request $request)
     {
         $service = new AuthService;

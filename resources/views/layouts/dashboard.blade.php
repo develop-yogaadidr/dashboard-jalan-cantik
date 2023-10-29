@@ -2,12 +2,12 @@
 
 <body class="antialiased">
     <div id="wrapper">
-        @include('layouts.navbars.sidebar')
+        @include('layouts.navbars.dashboard.sidebar')
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
-                @include('layouts.navbars.navbar')
+                @include('layouts.navbars.dashboard.navbar')
 
                 <div class="container-fluid">
                     <!-- Page Heading -->
