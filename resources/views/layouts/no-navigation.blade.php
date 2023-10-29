@@ -3,16 +3,11 @@
 <body class="antialiased">
     <div id="wrapper">
         <div id="content-wrapper" class="d-flex flex-column">
-            @include('layouts.navbars.public.navbar')
             <!-- Main Content -->
-            <div id="content" style="margin-top:102px;min-height:400px">
+            <div id="content">
                 @yield('content')
             </div>
-            @include('layouts.navbars.public.bottom-navbar')
-
         </div>
-
     </div>
 </body>
-
 @include('layouts.footers.public.footer')

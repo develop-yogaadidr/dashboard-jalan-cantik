@@ -1,4 +1,4 @@
-@include('layouts.headers.header')
+@include('layouts.headers.dashboard.header')
 
 <body class="antialiased">
     <div id="wrapper">
@@ -56,4 +56,4 @@
     </div>
 </body>
 
-@include('layouts.footers.footer')
+@include('layouts.footers.dashboard.footer')

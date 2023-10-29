@@ -203,7 +203,7 @@ return [
         [
             'id' => "tentang",
             "name" => "Tentang Jalan Cantik",
-            "target" => "tentang-jalan-cantik"
+            "target" => "tentang"
         ],
         [
             'id' => "laporan",
