@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 @php
     $statuses = [['label' => 'Semua Status Laporan', 'value' => 'all'], ['label' => 'Diterima', 'value' => 'Diterima'], ['label' => 'Proses Pengerjaan', 'value' => 'Proses Pengerjaan'], ['label' => 'Ditolak', 'value' => 'Ditolak'], ['label' => 'Ditunda', 'value' => 'Ditunda'], ['label' => 'Selesai', 'value' => 'Selesai']];
-    
     $current_year = Date('Y');
     $years = [['label' => 'Semua Tahun Laporan', 'value' => 'all']];
     for ($i = 0; $i < 4; $i++) {

@@ -24,3 +24,47 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
 </head>
+
+<style>
+    body {
+        font-size: 14px;
+    }
+
+    .list-container {
+        border-bottom: 1px solid #E8E8E8;
+        background: #FFF;
+        padding: 16px 24px;
+    }
+
+    .title {
+        font-style: normal;
+        font-weight: bold;
+        line-height: normal;
+    }
+
+    .title-big {
+        font-size: 16px;
+    }
+
+    .title-primary {
+        color: #FFB444;
+    }
+
+    .text-label {
+        color: #6F6F6F;
+        line-height: normal;
+    }
+
+    .chip {
+        height: 24px;
+        flex-shrink: 0;
+        border-radius: 8px;
+        background: #DEDEDE;
+        font-size: 14px;
+        padding: 2px 12px;
+    }
+
+    .small-chip {
+        font-size: 12px;
+    }
+</style>

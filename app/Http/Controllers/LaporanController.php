@@ -39,7 +39,7 @@ class LaporanController extends Controller
             return redirect()->back()->with('warning', $response->message);
         }
 
-        return redirect('/dashboard/laporan/'.$id)->with('success', "Laporan berhasil diperbarui");
+        return redirect('/dashboard/laporan/' . $id)->with('success', "Laporan berhasil diperbarui");
     }
 
     public function statusJalan(Request $request)
@@ -143,9 +143,23 @@ class LaporanController extends Controller
 
         $url = URL::to('/') . "/dashboard/data/laporan?" . $filter['year'] . $filter['city'] . $filter['status'];
 
-        return view('pages.dashboard.laporan.daftar-laporan', [
+        $statuses = [['label' => 'Semua Status Laporan', 'value' => 'all'], ['label' => 'Diterima', 'value' => 'Diterima'], ['label' => 'Proses Pengerjaan', 'value' => 'Proses Pengerjaan'], ['label' => 'Ditolak', 'value' => 'Ditolak'], ['label' => 'Ditunda', 'value' => 'Ditunda'], ['label' => 'Selesai', 'value' => 'Selesai']];
+        $types = [['label' => 'Semua Kasus Jalan', 'value' => 'all'], ['label' => 'Jalan Rusak', 'value' => 'Jalan Rusak'], ['label' => 'Saluran Drainase', 'value' => 'Saluran Drainase'], ['label' => 'Gorong-Gorong', 'value' => 'Gorong-Gorong'], ['label' => 'Bahu Jalan', 'value' => 'Bahu Jalan'], ['label' => 'Pohon Tumbang', 'value' => 'Pohon Tumbang'], ['label' => 'Bencana', 'value' => 'Bencana'], ['label' => 'Genangan Air', 'value' => 'Genangan Air'], ['label' => 'Lainnya', 'value' => 'Lainnya']];
+        $current_year = Date('Y');
+        $years = [['label' => 'Semua Tahun Laporan', 'value' => 'all']];
+        for ($i = 0; $i < 4; $i++) {
+            array_push($years, ['label' => $current_year - $i, 'value' => $current_year - $i]);
+        }
+
+        return view('pages.dashboard.laporan.daftar-laporan-new', [
             "title" => "Daftar Laporan ", "active_menu" => "dashboard", 'breadcrumbs' => $breadcrumbs,  "url" => $url,
-            "filter" => $filter['selected_data'], "cities" => $cities->body->data
+            "filter" => $filter['selected_data'], "list_of_data" =>
+            [
+                "statuses" => $statuses,
+                "types" => $types,
+                "years" => $years,
+                "cities" => $cities->body->data
+            ]
         ]);
     }
 
@@ -186,9 +200,11 @@ class LaporanController extends Controller
         $selected_year = $request->selected_year ?? "all";
         $selected_status = $request->selected_status ?? "all";
         $selected_city = $request->selected_city ?? "all";
+        $selected_kasus = $request->selected_kasus ?? "all";
 
         $filter_year = $selected_year == "all" ? "" : "&period=" . $selected_year;
         $filter_status = $selected_status == "all" ? "" : "&main_filter[]=reports.status," . $selected_status;
+        $filter_kasus = $selected_kasus == "all" ? "" : "&main_filter[]=reports.type," . $selected_kasus;
         $filter_city = $selected_city == "all" ? "" : "&main_filter[]=reports.city_id," . $selected_city;
 
         return  [
@@ -196,10 +212,12 @@ class LaporanController extends Controller
                 "selected_year" => $selected_year,
                 "selected_status" => $selected_status,
                 "selected_city" => $selected_city,
+                "selected_kasus" => $selected_kasus
             ],
             "year" => $filter_year,
             "status" => $filter_status,
-            "city" => $filter_city
+            "city" => $filter_city,
+            "kasus" => $filter_kasus
         ];
     }
 }
