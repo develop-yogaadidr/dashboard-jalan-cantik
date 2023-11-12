@@ -165,7 +165,6 @@ $(document).ready(async function () {
     }
 
     function generateTableInformation(dataResponse){
-        console.log(dataResponse);
         let start = dataResponse.body.from ?? 0;
         let end = dataResponse.body.to ?? 0;
         let total = dataResponse.body.total ?? 0;
