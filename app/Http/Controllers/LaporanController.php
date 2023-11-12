@@ -126,22 +126,8 @@ class LaporanController extends Controller
         $filter = $this->populateFilter($request);
         $city_service = new CityService;
         $cities = $city_service->getAll();
-        $breadcrumbs = [
-            [
-                "label" => 'Dashboard',
-                'link' => '/dashboard'
-            ],
-            [
-                "label" => 'Laporan ',
-                'link' => ''
-            ],
-            [
-                "label" => 'Daftar',
-                'link' => ''
-            ],
-        ];
 
-        $url = URL::to('/') . "/dashboard/data/laporan?" . $filter['year'] . $filter['city'] . $filter['status'];
+        $url = URL::to('/') . "/dashboard/data/laporan?join=user,progress.updater" . $filter['year'] . $filter['city'] . $filter['status'] . $filter['kasus'];
 
         $statuses = [['label' => 'Semua Status Laporan', 'value' => 'all'], ['label' => 'Diterima', 'value' => 'Diterima'], ['label' => 'Proses Pengerjaan', 'value' => 'Proses Pengerjaan'], ['label' => 'Ditolak', 'value' => 'Ditolak'], ['label' => 'Ditunda', 'value' => 'Ditunda'], ['label' => 'Selesai', 'value' => 'Selesai']];
         $types = [['label' => 'Semua Kasus Jalan', 'value' => 'all'], ['label' => 'Jalan Rusak', 'value' => 'Jalan Rusak'], ['label' => 'Saluran Drainase', 'value' => 'Saluran Drainase'], ['label' => 'Gorong-Gorong', 'value' => 'Gorong-Gorong'], ['label' => 'Bahu Jalan', 'value' => 'Bahu Jalan'], ['label' => 'Pohon Tumbang', 'value' => 'Pohon Tumbang'], ['label' => 'Bencana', 'value' => 'Bencana'], ['label' => 'Genangan Air', 'value' => 'Genangan Air'], ['label' => 'Lainnya', 'value' => 'Lainnya']];
@@ -152,7 +138,7 @@ class LaporanController extends Controller
         }
 
         return view('pages.dashboard.laporan.daftar-laporan-new', [
-            "title" => "Daftar Laporan ", "active_menu" => "dashboard", 'breadcrumbs' => $breadcrumbs,  "url" => $url,
+            "title" => "Daftar Laporan ", "active_menu" => "dashboard",  "url" => $url,
             "filter" => $filter['selected_data'], "list_of_data" =>
             [
                 "statuses" => $statuses,
@@ -168,9 +154,9 @@ class LaporanController extends Controller
     public function getDataLaporan(Request $request)
     {
         $service = new ReportService;
-        $users = $service->getAll($request->getQueryString());
+        $response = $service->getAll($request->getQueryString());
 
-        return response()->json($users);
+        return response()->json($response);
     }
 
     private function detailBreadcrumbs($menu, $link)
@@ -202,7 +188,7 @@ class LaporanController extends Controller
         $selected_city = $request->selected_city ?? "all";
         $selected_kasus = $request->selected_kasus ?? "all";
 
-        $filter_year = $selected_year == "all" ? "" : "&period=" . $selected_year;
+        $filter_year = $selected_year == "all" ? "" : "&period=" . $selected_year . ",reports.created_at";
         $filter_status = $selected_status == "all" ? "" : "&main_filter[]=reports.status," . $selected_status;
         $filter_kasus = $selected_kasus == "all" ? "" : "&main_filter[]=reports.type," . $selected_kasus;
         $filter_city = $selected_city == "all" ? "" : "&main_filter[]=reports.city_id," . $selected_city;

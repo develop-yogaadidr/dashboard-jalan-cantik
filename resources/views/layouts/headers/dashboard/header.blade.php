@@ -19,6 +19,7 @@
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('public/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/viewer.min.css') }}" rel="stylesheet">
 
     <script src="{{ asset('public/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
@@ -34,6 +35,11 @@
         border-bottom: 1px solid #E8E8E8;
         background: #FFF;
         padding: 16px 24px;
+        cursor: pointer;
+    }
+
+    .list-container-selected {
+        background: #FFF5EE;
     }
 
     .title {
