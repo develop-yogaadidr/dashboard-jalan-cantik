@@ -24,9 +24,9 @@
                     <input class="form-control" type="file" name="{{ $image }}" id="{{ $image }}">
                 </div>
             @endforeach
-            <x-button color="primary" type="submit" width="100">Simpan</x-button>
             <button class="btn btn-outline-secondary" onclick="history.back()" type="button"
                 data-dismiss="modal">Batal</button>
+            <x-button color="primary" type="submit" width="100">Simpan</x-button>
         </x-form>
     </x-card>
 @endsection

@@ -37,11 +37,9 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
     Route::post('logout', [AuthController::class, 'logoutProcess']);
 
     Route::prefix("laporan")->group(function () {
+        Route::get('/', [LaporanController::class, 'daftarLaporanByStatus']);
         Route::get('/status-jalan', [LaporanController::class, 'statusJalan']);
         Route::get('/kasus-jalan', [LaporanController::class, 'kasusJalan']);
-        Route::get('/status-jalan/{status}', [LaporanController::class, 'daftarLaporanByStatusJalan']);
-        Route::get('/kasus-jalan/{kasus}', [LaporanController::class, 'daftarLaporanByKasusJalan']);
-        Route::get('/status', [LaporanController::class, 'daftarLaporanByStatus']);
         Route::get('/{id}', [LaporanController::class, 'detailLaporan']);
         Route::get('/{id}/{status}', [LaporanController::class, 'prosesLaporan']);
         Route::post('/{id}/{status}/create', [LaporanController::class, 'createProsesLaporan']);

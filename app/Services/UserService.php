@@ -79,8 +79,6 @@ class UserService extends ServiceBase
         $dto->role = $input['role'];
         $dto->admin_role_id = $input['admin_role_id'];
 
-        var_dump($dto);
-
         $repository = new UserRepository();
         $responseDto = $this->buildResponse($repository->update($id, $dto));
 
