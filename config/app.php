@@ -203,7 +203,7 @@ return [
         [
             'id' => "tentang",
             "name" => "Tentang Jalan Cantik",
-            "target" => "tentang"
+            "target" => "/tentang"
         ],
         [
             'id' => "laporan",
@@ -230,17 +230,62 @@ return [
         [
             'id' => "download",
             "name" => "Download",
-            "target" => "download"
+            "target" => "/download"
         ],
         [
             'id' => "kontak",
             "name" => "Kontak",
-            "target" => "kontak"
+            "target" => "/kontak"
         ],
         [
-            'id' => "privacy",
+            'id' => "privacy-policy",
             "name" => "Privacy - Policy",
-            "target" => "privacy-policy"
+            "target" => "/privacy-policy"
+        ],
+    ],
+
+    'contacts' => [
+        'location' => [
+            'title' => 'Dinas PU Bina Marga dan Cipta Karya Provinsi Jawa Tengah Jl. Madukoro Blok AA-BB, Semarang 50144',
+            'alt-title' => 'Jl. Madukoro Blok AA-BB, Semarang 50144',
+            'icon' => 'fa fa-map-marker',
+            'link' => 'https://www.google.com/maps/place/Dinas+PU+Bina+Marga+dan+Cipta+Karya+Provinsi+Jawa+Tengah/@-6.9623799,110.3962303,19.25z/data=!4m6!3m5!1s0x2e70f4c6a1903aeb:0xf2e9aab67c0b9195!8m2!3d-6.9622147!4d110.3978563!16s%2Fg%2F1td3bvpf?hl=id&entry=ttu'
+        ],
+        'email' => [
+            'title' => 'dpubinmarcipka@jateng.go.id',
+            'alt-title' => 'dpubinmarcipka@jateng.go.id',
+            'icon' => 'fa fa-envelope-o',
+            'link' => '',
+        ],
+        'phone' => [
+            'title' => '(024) 7608368',
+            'alt-title' => '(024) 7608368 Faksimil. (024) 7613181',
+            'link' => '',
+            'icon' => 'fa fa-phone',
+        ],
+        'instagram' => [
+            'title' => 'instagram.com/dpubmckjateng',
+            'alt-title' => '@dpubmckjateng',
+            'link' => 'https://www.instagram.com/dpubmckjateng',
+            'icon' => 'fa fa-instagram',
+        ],
+        'youtube' => [
+            'title' => 'dpubmckjateng',
+            'alt-title' => 'dpubmckjateng',
+            'link' => 'https://www.youtube.com/@dpubmckjateng3973',
+            'icon' => 'fa fa-youtube-play',
+        ],
+        'facebook' => [
+            'title' => 'facebook.com/dpubmckjateng',
+            'alt-title' => 'Dinas PU BMCK',
+            'link' => 'https://www.facebook.com/dpubmckjateng',
+            'icon' => 'fa fa-facebook',
+        ],
+        'twitter' => [
+            'title' => 'twitter.com/dpubmckjateng',
+            'alt-title' => '@dpubmckjateng',
+            'link' => 'https://twitter.com/dpubmckjateng',
+            'icon' => 'fa fa-twitter',
         ],
     ],
 

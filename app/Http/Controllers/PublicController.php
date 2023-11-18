@@ -8,12 +8,12 @@ class PublicController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages.public.home', ["title" => "Home"]);
+        return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda"]);
     }
 
     public function tentang(Request $request)
     {
-        return view('pages.under-construction', ["title" => "Tentang Jalan Cantik"]);
+        return view('pages.public.tentang', ["title" => "Tentang Jalan Cantik", "active_menu" => "tentang"]);
     }
     public function laporanMasuk(Request $request)
     {
@@ -32,16 +32,16 @@ class PublicController extends Controller
 
     public function download(Request $request)
     {
-        return view('pages.under-construction', ["title" => "Download"]);
+        return view('pages.public.download', ["title" => "Download", "active_menu" => "download"]);
     }
 
     public function kontak(Request $request)
     {
-        return view('pages.under-construction', ["title" => "Kontak"]);
+        return view('pages.public.kontak', ["title" => "Kontak", "active_menu" => "kontak"]);
     }
     
     public function privacyPolicy(Request $request)
     {
-        return view('pages.under-construction', ["title" => "Privacy - Policy"]);
+        return view('pages.public.privacy-policy', ["title" => "Privacy - Policy", "active_menu" => "privacy-policy"]);
     }
 }

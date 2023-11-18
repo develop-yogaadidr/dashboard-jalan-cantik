@@ -31,14 +31,14 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach ($element['sub-items'] as $item)
                                     <li><a class="dropdown-item"
-                                            href="{{ URL::to('/') . '/' . $item['target'] }}">{{ $item['name'] }}</a>
+                                            href="{{ URL::to('/') . $item['target'] }}">{{ $item['name'] }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </li>
                     @else
                         <li class="nav-item mr-3">
-                            <a class="nav-link" href="{{ URL::to('/') . '/' . $element['target'] }}" tabindex="-1"
+                            <a class="nav-link {{ $element['id'] == ($active_menu ?? '') ? 'active' : ''  }}" href="{{ URL::to('/') . $element['target'] }}" tabindex="-1"
                                 aria-disabled="true">{{ $element['name'] }}</a>
                         </li>
                     @endif

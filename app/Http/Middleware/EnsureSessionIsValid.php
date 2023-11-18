@@ -17,7 +17,7 @@ class EnsureSessionIsValid
     {
         $auth = session('auth');
         if ($auth == null) {
-            return redirect('/login')->with('warning', 'Session has been expired');
+            return redirect('/login')->with('warning', 'Sesi telah berakhir, silahkan login kembali');
         }
 
         return $next($request);

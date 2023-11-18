@@ -10,11 +10,9 @@
             <div class="card-footer" id="laporan-pages">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">
-                                << /a>
-                        </li>
+                        <li class="page-item"><a class="page-link" href="#"> < </a></li>
                         <li class="page-item"><a class="page-link" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">></a></li>
+                        <li class="page-item"><a class="page-link" href="#"> > </a></li>
                     </ul>
                 </nav>
             </div>
@@ -25,7 +23,7 @@
             <ul class="nav nav-tabs">
                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#detail">Detail Laporan</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#progress">Progress</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#progress">Tindak Lanjut</a></li>
             </ul>
             <div class="card-body">
                 <div class="tab-content">
