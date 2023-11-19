@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'card mb-4 shadow', 'style' => '']) }}>
+<div {{ $attributes->merge(['class' => 'card mb-4 shadow rounded-lg', 'style' => '']) }}>
     @if ($image != '')
         <img src="{{ $image }}" class="card-img-top" alt="...">
     @endif

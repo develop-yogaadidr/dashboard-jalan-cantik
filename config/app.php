@@ -249,6 +249,10 @@ return [
             'title' => 'Dinas PU Bina Marga dan Cipta Karya Provinsi Jawa Tengah Jl. Madukoro Blok AA-BB, Semarang 50144',
             'alt-title' => 'Jl. Madukoro Blok AA-BB, Semarang 50144',
             'icon' => 'fa fa-map-marker',
+            'data' => [
+                'latitude' => -6.9623799,
+                'longitude' => 110.3962303
+            ],
             'link' => 'https://www.google.com/maps/place/Dinas+PU+Bina+Marga+dan+Cipta+Karya+Provinsi+Jawa+Tengah/@-6.9623799,110.3962303,19.25z/data=!4m6!3m5!1s0x2e70f4c6a1903aeb:0xf2e9aab67c0b9195!8m2!3d-6.9622147!4d110.3978563!16s%2Fg%2F1td3bvpf?hl=id&entry=ttu'
         ],
         'email' => [
@@ -287,6 +291,12 @@ return [
             'link' => 'https://twitter.com/dpubmckjateng',
             'icon' => 'fa fa-twitter',
         ],
+        'whatsapp' => [
+            'title' => 'Whatsapp',
+            'alt-title' => 'Whatsapp',
+            'link' => 'https://api.whatsapp.com/send/?phone=6281296110198&text&type=phone_number&app_absent=0',
+            'icon' => 'fa fa-whatsapp',
+        ]
     ],
 
     'dashboard-menu' => [
