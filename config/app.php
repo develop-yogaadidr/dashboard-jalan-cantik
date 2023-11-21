@@ -296,6 +296,12 @@ return [
             'alt-title' => 'Whatsapp',
             'link' => 'https://api.whatsapp.com/send/?phone=6281296110198&text&type=phone_number&app_absent=0',
             'icon' => 'fa fa-whatsapp',
+        ],
+        'play_store' => [
+            'title' => 'Play Store',
+            'alt-title' => 'Google Play Store',
+            'link' => 'https://play.google.com/store/apps/details?id=com.dpu',
+            'icon' => '',
         ]
     ],
 

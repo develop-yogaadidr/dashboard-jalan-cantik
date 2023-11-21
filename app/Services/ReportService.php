@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Dtos\CreateProgressLaporanRequestDto;
 use App\Repositories\ProgressReporitory;
+use App\Repositories\PublicReportRepository;
 use App\Repositories\ReportRepository;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,32 @@ class ReportService extends ServiceBase
     {
         $repository = new ProgressReporitory();
         $responseDto = $this->buildResponse($repository->createProgress($request));
+
+        return $responseDto;
+    }
+
+    // PUBLIC
+
+    public function getCounterTotalLaporan()
+    {
+        $repository = new PublicReportRepository();
+        $responseDto = $this->buildResponse($repository->getCounterTotalLaporan());
+
+        return $responseDto;
+    }
+
+    public function getCounterLaporanDiterimaAi()
+    {
+        $repository = new PublicReportRepository();
+        $responseDto = $this->buildResponse($repository->getCounterLaporanDiterimaAi());
+
+        return $responseDto;
+    }
+
+    public function getCounterKinerja($status_jalan)
+    {
+        $repository = new PublicReportRepository();
+        $responseDto = $this->buildResponse($repository->getCounterKinerja($status_jalan));
 
         return $responseDto;
     }

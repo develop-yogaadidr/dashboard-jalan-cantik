@@ -220,7 +220,6 @@
             };
 
             let action = actions[laporan.status];
-            console.log(action);
 
             let content = '';
             action.forEach(e => {

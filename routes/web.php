@@ -24,6 +24,7 @@ Route::get('/', [PublicController::class, 'index']);
 Route::get('/tentang', [PublicController::class, 'tentang']);
 Route::get('/laporan-masuk', [PublicController::class, 'laporanMasuk']);
 Route::get('/laporan-diterima-ai', [PublicController::class, 'laporanDiterimaAi']);
+Route::get('/laporan-diterima-ai/detail', [PublicController::class, 'laporanDetailDiterimaAi']);
 Route::get('/laporan-ditolak-ai', [PublicController::class, 'laporanDitolakAi']);
 Route::get('/download', [PublicController::class, 'download']);
 Route::get('/kontak', [PublicController::class, 'kontak']);
@@ -31,6 +32,11 @@ Route::get('/privacy-policy', [PublicController::class, 'privacyPolicy']);
 
 Route::get('login', [AuthController::class, 'login'])->name("login");
 Route::post('login', [AuthController::class, 'loginProcess']);
+
+Route::prefix("data")->group(function () {
+    Route::get('/laporan', [LaporanController::class, 'getDataLaporan']);
+    Route::get('/laporan-kinerja/{status_jalan}', [PublicController::class, 'getDataKinerja']);
+});
 
 Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);

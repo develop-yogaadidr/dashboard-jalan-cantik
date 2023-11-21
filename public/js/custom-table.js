@@ -28,7 +28,7 @@ $(document).ready(async function () {
         if (dataTable.url == "") return;
 
         loadData();
-        generateButtons();
+        // generateButtons();
     }
 
     function loadData() {
@@ -36,7 +36,6 @@ $(document).ready(async function () {
 
         let url = dataTable.url + concat + page + "&" + search;
         loading(true)
-        updateActionButtonDisableProperty(true)
 
         getData(url).then((response) => {
             loading(false)
@@ -57,7 +56,7 @@ $(document).ready(async function () {
     function generateSerach(value) {
         if (value == undefined) return;
 
-        if(value == ""){
+        if (value == "") {
             search = "";
             loadData();
             return;
@@ -65,7 +64,7 @@ $(document).ready(async function () {
 
         let filters = [];
         dataTable.columns.forEach(col => {
-            if (col == "increment") {
+            if (col == "increment" || col.includes("button")) {
                 return;
             }
 
@@ -81,7 +80,7 @@ $(document).ready(async function () {
     function generateBody(dataResponse) {
         var content = "";
 
-        if (dataResponse.body.data.length == 0) {
+        if (dataResponse.data.length == 0) {
             $(`#${dataTable.table_id} tbody`).html(`
             <tr>
                 <td colspan="${dataTable.columns.length}" align="center">Tidak ditemukan data</td>
@@ -90,12 +89,18 @@ $(document).ready(async function () {
             return;
         }
 
-        let startNumber = dataResponse.body.from;
-        dataResponse.body.data.forEach((element, index) => {
-            let body = `<tr class="table-content" data-id="${element.id}">`;
+        let startNumber = dataResponse.from;
+        dataResponse.data.forEach((element, index) => {
+            let body = `<tr class="table-content">`;
             dataTable.columns.forEach(col => {
-                // TODO: revisit then
                 let value = col == "increment" ? startNumber + index : element[col];
+                if (col.includes('button')) {
+                    let button = generateContentButton(element, col);
+                    if (button == null) return;
+
+                    body += `<td>${button}</td>`;
+                    return;
+                }
 
                 if (!Number.isInteger(value)) {
                     var date = new Date(value);
@@ -116,37 +121,57 @@ $(document).ready(async function () {
         });
 
         $(`#${dataTable.table_id} tbody`).html(content);
+    }
 
-        $(".table-content").each(function (index, element) {
-            $(element).click(function () {
-                selected_id = $(element).data("id");
+    function generateContentButton(report, value) {
+        let button_name = value.split('.')[1];
+        let button = dataTable.buttons.filter(element => {
+            return element.button == button_name;
+        });
 
-                $(".table-content").each(function (i, el) {
-                    $(el).removeClass("table-primary")
-                })
+        if (button.length == 0) return null;
 
-                $(element).addClass("table-primary")
+        var regExp = /\{([^)]+)\}/;
+        var matches = regExp.exec(button[0].action_url);
+        let action_url = button[0].action_url.replace(matches[0], report[matches[1]])
 
-                updateActionButtonDisableProperty(false)
-            });
-        })
+        return `<a href="${action_url}" class="btn btn-outline-warning">${button[0].label}</a>`;
     }
 
     function generatePagination(dataResponse) {
+        var data = `
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>`;
+
         var nav = `<nav aria-label="Page navigation example">
             <ul class="pagination">`;
 
-        dataResponse.body.links.forEach((element) => {
+        dataResponse.links.forEach((element) => {
             var label = element.label == 'pagination.previous' ?
-                "Previous" :
+                "Prev" :
                 element.label == 'pagination.next' ?
                     "Next" :
                     element.label;
 
             var params = getUrlParams(element.url)
 
-            nav +=
-                `<li class="page-item"><button data-page="${params}" class="page-link ${params == "" ? 'disabled' : ''} ${dataResponse.body.current_page == label ? 'active' : ''} pagination-nav">${label}</button></li>`;
+            nav += `<li class="page-item ${dataResponse.current_page == label ? 'active' : ''}" aria-current="page">
+                        <button data-page="${params}" class="page-link ${params == "" ? 'disabled' : ''}  pagination-nav">${label}</button>
+                    </li>`
+            
         });
         nav += `</ul></nav>`;
 
@@ -164,30 +189,12 @@ $(document).ready(async function () {
         })
     }
 
-    function generateTableInformation(dataResponse){
-        let start = dataResponse.body.from ?? 0;
-        let end = dataResponse.body.to ?? 0;
-        let total = dataResponse.body.total ?? 0;
+    function generateTableInformation(dataResponse) {
+        let start = dataResponse.from ?? 0;
+        let end = dataResponse.to ?? 0;
+        let total = dataResponse.total ?? 0;
         let body = `${start}-${end} of ${total} items`;
         $("#table-information").html(body);
-    }
-
-    function generateButtons() {
-        dataTable.buttons.forEach(element => {
-            $(`#table-${element.button}-button`).data('url', element.action_url).css("display", "inline")
-        })
-
-        $(".table-action-button").each((index, element) => {
-            $(element).click(() => {
-                location.href = $(element).data("url") + "/" + selected_id;
-            })
-        })
-    }
-
-    function updateActionButtonDisableProperty(value) {
-        $(".table-action-button").each(function () {
-            $(this).prop('disabled', value);
-        });
     }
 
     async function getData(fetch_url) {

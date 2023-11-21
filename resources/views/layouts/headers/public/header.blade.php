@@ -21,11 +21,20 @@
 
     <script src="{{ asset('public/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <style>
     body {
         font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .card-counter {
+        border-radius: 12px;
+        padding: 24px 0;
+        background: #fbd12d;
+        color: #131313;
     }
 </style>
