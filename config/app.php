@@ -213,17 +213,17 @@ return [
                 [
                     'id' => "laporan-masuk",
                     "name" => "Masuk",
-                    "target" => "",
+                    "target" => "/laporan-masuk",
                 ],
                 [
                     'id' => "laporan-diterima-ai",
                     "name" => "Diterima AI",
-                    "target" => "",
+                    "target" => "/laporan-diterima-ai",
                 ],
                 [
                     'id' => "laporan-ditolak-ai",
                     "name" => "Ditolak AI",
-                    "target" => "",
+                    "target" => "/laporan-masuk",
                 ]
             ]
         ],
