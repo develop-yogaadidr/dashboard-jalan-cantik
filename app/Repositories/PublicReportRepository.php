@@ -11,6 +11,13 @@ class PublicReportRepository extends BaseRepository
         parent::__construct("/public/reports", "");
     }
 
+    public function getAll($queryString = "")
+    {
+        $response = Http::get($this->base_url . "?" . $queryString);
+
+        return $response;
+    }
+
     public function getCounterTotalLaporan()
     {
         $response = Http::withToken($this->token)->get($this->base_url . '/counter');

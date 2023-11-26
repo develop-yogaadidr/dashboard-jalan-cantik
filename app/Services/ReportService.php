@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Dtos\CreateProgressLaporanRequestDto;
 use App\Repositories\ProgressReporitory;
 use App\Repositories\PublicReportRepository;
 use App\Repositories\ReportRepository;
@@ -14,6 +13,14 @@ class ReportService extends ServiceBase
     {
         $repository = new ReportRepository();
         $responseDto = $this->buildResponse($repository->getAllData($queryString));
+
+        return $responseDto;
+    }
+
+    public function getAllPublic($queryString = "")
+    {
+        $repository = new PublicReportRepository();
+        $responseDto = $this->buildResponse($repository->getAll($queryString));
 
         return $responseDto;
     }

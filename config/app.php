@@ -194,6 +194,16 @@ return [
         // ...
     ])->toArray(),
 
+    "color" => [
+        'Diterima' => 'secondary ',
+        'Ditolak' => 'danger',
+        'Ditunda' => 'warning',
+        'Proses Pengerjaan' => 'info',
+        'Selesai' => 'success',
+    ],
+
+    "image_url" => env('IMAGE_SERVER', ''),
+
     'public-menu' => [
         [
             'id' => "beranda",

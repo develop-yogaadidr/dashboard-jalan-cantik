@@ -13,7 +13,7 @@ jQuery.fn.extend({
             dataTable.columns = property.columns ?? []
             dataTable.table_id = $(element).attr('id');
             dataTable.entity = property.entity ?? "";
-            dataTable.buttons = property.buttons;
+            dataTable.buttons = property.buttons ?? [];
         });
     }
 });
@@ -23,12 +23,11 @@ $(document).ready(async function () {
     let page = "page=1";
     let selected_id = -1;
 
+
     init();
     function init() {
         if (dataTable.url == "") return;
-
         loadData();
-        // generateButtons();
     }
 
     function loadData() {
@@ -42,6 +41,7 @@ $(document).ready(async function () {
             generateBody(response);
             generatePagination(response);
             generateTableInformation(response);
+
         }).catch(e => {
             loading(false)
             return;
@@ -79,7 +79,6 @@ $(document).ready(async function () {
 
     function generateBody(dataResponse) {
         var content = "";
-
         if (dataResponse.data.length == 0) {
             $(`#${dataTable.table_id} tbody`).html(`
             <tr>
@@ -171,7 +170,7 @@ $(document).ready(async function () {
             nav += `<li class="page-item ${dataResponse.current_page == label ? 'active' : ''}" aria-current="page">
                         <button data-page="${params}" class="page-link ${params == "" ? 'disabled' : ''}  pagination-nav">${label}</button>
                     </li>`
-            
+
         });
         nav += `</ul></nav>`;
 
@@ -194,6 +193,7 @@ $(document).ready(async function () {
         let end = dataResponse.to ?? 0;
         let total = dataResponse.total ?? 0;
         let body = `${start}-${end} of ${total} items`;
+       
         $("#table-information").html(body);
     }
 
@@ -217,6 +217,11 @@ $(document).ready(async function () {
 
     $("#table-search-button").click(function () {
         generateSerach($("#table-search").val())
+    });
+
+    $("#table-search-clear-button").click(function () {
+        $("#table-search").val("")
+        generateSerach("")
     });
 
     $('#table-search').keypress(function (event) {

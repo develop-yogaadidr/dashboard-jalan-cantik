@@ -14,5 +14,7 @@
 <script src="{{ asset('public/vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('public/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('public/js/custom-table.js') }}"></script>
+<script src="{{ asset('public/js/custom-image-gallery.js') }}"></script>
+
 
 </html>

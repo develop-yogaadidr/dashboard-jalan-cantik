@@ -40,7 +40,7 @@
                         <i class="fas fa-fw {{ $item['icon'] }}"></i>
                         <span>{{ $item['name'] }}</span>
                     </a>
-                    <div id="colapse-{{ $item['id'] }}" class="collapse {{ $isactive ? 'show' : '' }}"
+                    <div id="colapse-{{ $item['id'] }}" class="collapse {{ $isactive ? 'shows' : '' }}"
                         aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             @foreach ($item['sub-items'] as $subitem)

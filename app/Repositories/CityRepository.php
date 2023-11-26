@@ -17,4 +17,11 @@ class CityRepository extends BaseRepository
 
         return $response;
     }
+
+    public function getAllWilayah($queryString = "")
+    {
+        $response = Http::withToken($this->token)->get($this->base_url . "/wilayah?" . $queryString);
+
+        return $response;
+    }
 }

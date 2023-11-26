@@ -23,8 +23,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublicController::class, 'index']);
 Route::get('/tentang', [PublicController::class, 'tentang']);
 Route::get('/laporan-masuk', [PublicController::class, 'laporanMasuk']);
+Route::get('/laporan-masuk/{id}', [PublicController::class, 'detailLaporanMasuk']);
 Route::get('/laporan-diterima-ai', [PublicController::class, 'laporanDiterimaAi']);
-Route::get('/laporan-diterima-ai/detail', [PublicController::class, 'laporanDetailDiterimaAi']);
+Route::get('/laporan-diterima-ai/Provinsi', [PublicController::class, 'laporanDiterimaAiProvinsi']);
+Route::get('/laporan-diterima-ai/KabupatenKota', [PublicController::class, 'laporanDiterimaAiByKota'])->name("laporan-diterima-ai-kabupaten-kota");
+Route::get('/laporan-diterima-ai/Desa', [PublicController::class, 'laporanDiterimaAiByKota'])->name("laporan-diterima-ai-desa");;
 Route::get('/laporan-ditolak-ai', [PublicController::class, 'laporanDitolakAi']);
 Route::get('/download', [PublicController::class, 'download']);
 Route::get('/kontak', [PublicController::class, 'kontak']);
@@ -34,7 +37,7 @@ Route::get('login', [AuthController::class, 'login'])->name("login");
 Route::post('login', [AuthController::class, 'loginProcess']);
 
 Route::prefix("data")->group(function () {
-    Route::get('/laporan', [LaporanController::class, 'getDataLaporan']);
+    Route::get('/laporan', [PublicController::class, 'getDataLaporan']);
     Route::get('/laporan-kinerja/{status_jalan}', [PublicController::class, 'getDataKinerja']);
 });
 

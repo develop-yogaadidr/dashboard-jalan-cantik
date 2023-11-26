@@ -2,11 +2,19 @@
 
 @php
 
-$link = [
-    'Laporan Masuk' => URL::to('/') . '/laporan-masuk',
-    'Laporan Diterima AI' => URL::to('/') . '/laporan-diterima-ai',
-    'Laporan Ditolak AI' => URL::to('/') . '/laporan-ditolak-ai',
-];
+    $link_laporan_kerusakan = [
+        'Laporan Masuk' => URL::to('/') . '/laporan-masuk',
+        'Laporan Diterima AI' => URL::to('/') . '/laporan-diterima-ai',
+        'Laporan Ditolak AI' => URL::to('/') . '/laporan-ditolak-ai',
+    ];
+
+    $link_laporan_publik = [
+        'Diterima' => URL::to('/') . '/laporan-masuk?selected_status=Diterima',
+        'Proses Pengerjaan' => URL::to('/') . '/laporan-masuk?selected_status=Proses Pengerjaan',
+        'Ditolak' => URL::to('/') . '/laporan-masuk?selected_status=Ditolak',
+        'Ditunda' => URL::to('/') . '/laporan-masuk?selected_status=Ditunda',
+        'Selesai' => URL::to('/') . '/laporan-masuk?selected_status=Selesai',
+    ];
 
 @endphp
 
@@ -97,16 +105,39 @@ $link = [
     </section>
     <section class="counter p-5">
         <div class="container">
-            <x-card class="p-3 text-center">
-                <div class="d-inline-flex mb-3">
+            <x-card class="p-5 text-center">
+                <div class="d-inline-flex mb-5">
                     <img src="{{ URL::to('/') . '/public/images/blog.png' }}" style="height:80px" class="mr-3">
                     <div class="text-center h3 lh-base mb-4">Laporan Kerusakan di <br />Provinsi Jawa Tengah</div>
-
                 </div>
-                <div class="row">
-                    @foreach ($counter->body as $element)
+                <div class="row justify-content-md-center">
+                    @foreach ($counter['total']->body as $element)
+                        <div class="col-3">
+                            <a href="{{ $link_laporan_kerusakan[$element->label] }}"
+                                class="card card-counter text-decoration-none shadow link-dark hover-scale">
+                                <div class="card-body text-center">
+                                    <h2>{{ $element->counter }}</h2>
+                                    <span>{{ $element->label }}</span>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </x-card>
+        </div>
+    </section>
+
+    <section class="counter pb-5">
+        <div class="container">
+            <x-card class="p-5 text-center">
+                <div class="d-inline-flex mb-5">
+                    <div class="text-center h3 lh-base mb-4">Laporan Publik</div>
+                </div>
+                <div class="row gy-4 justify-content-md-center">
+                    @foreach ($counter['publik']->body->details as $element)
                         <div class="col-4">
-                            <a href="{{$link[$element->label]}}" class="card card-counter text-decoration-none shadow link-dark">
+                            <a href="{{ $link_laporan_publik[$element->label] }}"
+                                class="card card-counter text-decoration-none shadow link-dark hover-scale">
                                 <div class="card-body text-center">
                                     <h2>{{ $element->counter }}</h2>
                                     <span>{{ $element->label }}</span>

@@ -12,7 +12,7 @@
             @endif
         </label><br>
     @endif
-    <select {{ $attributes->merge(['class' => 'form-control']) }} id="{{ $name }}"
+    <select {{ $attributes->merge(['class' => 'form-select']) }} id="{{ $name }}"
         @if ($isNeedValidation) required @endif name="{{ $name }}">
         {{ $slot }}
     </select>

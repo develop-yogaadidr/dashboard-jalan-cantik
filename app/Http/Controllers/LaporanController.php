@@ -134,7 +134,7 @@ class LaporanController extends Controller
             "breadcrumbs" => $breadcrumbs,
             "filter_counter" => $filter['counter'],
             "filter" => $filter['selected_data'],
-            "list_of_data" => $this->getListOfFilterData()
+            "list_of_data" => $this->getListOfFilterData(true)
         ]);
     }
 

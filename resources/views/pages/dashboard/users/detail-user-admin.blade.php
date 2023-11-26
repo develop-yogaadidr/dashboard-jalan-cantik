@@ -17,7 +17,7 @@
             </x-forms.select>
             <div id="admin_role_container">
                 <x-forms.select id="admin_role" name="admin_role_id" label="Level Admin">
-                    @foreach ($roles->body as $role)
+                    @foreach ($roles as $role)
                         <option @if ($user->admin_role_id == $role->id) selected @endif value="{{$role->id}}">{{ $role->name }}</option>
                     @endforeach
                 </x-forms.select>

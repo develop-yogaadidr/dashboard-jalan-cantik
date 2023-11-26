@@ -8,7 +8,7 @@
 @section('content')
     <div class="container pt-5 pb-5">
         <div class="title text-center mb-5">
-            <h2>Kontak Kami</h2>
+            <h2>{{ $title }}</h2>
         </div>
         <x-card class="p-3">
             <div class="row">

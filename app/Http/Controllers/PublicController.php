@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\CityService;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
 class PublicController extends Controller
@@ -12,19 +13,21 @@ class PublicController extends Controller
     public function index(Request $request)
     {
         $service = new ReportService();
-        $counter = $service->getCounterTotalLaporan();
+        $counter_total_laporan = $service->getCounterTotalLaporan();
+        $counter_laporan_publik = $service->getCounterLaporanDiterimaAi();
 
-        return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda", "counter" => $counter]);
+        return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda", "counter" => ["total" => $counter_total_laporan, "publik" => $counter_laporan_publik]]);
     }
 
     public function tentang(Request $request)
     {
         return view('pages.public.tentang', ["title" => "Tentang Jalan Cantik", "active_menu" => "tentang"]);
     }
+
     public function laporanMasuk(Request $request)
     {
         $filter = $this->populateFilter($request);
-        $url = env("SERVER_URL", '') . '/reports?join=user' . $filter['year'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'];
+        $url = env("SERVER_URL", '') . '/reports?join=user' . $filter['wilayah'] . $filter['year'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'];
 
         return view('pages.public.laporan.daftar-laporan', [
             "title" => "Laporan Masuk",
@@ -35,19 +38,82 @@ class PublicController extends Controller
         ]);
     }
 
-    public function laporanDiterimaAi(Request $request)
+    public function detailLaporanMasuk(Request $request, $id)
     {
-        $service = new ReportService();
-        $counter = $service->getCounterLaporanDiterimaAi();
+        $service = new ReportService;
+        $queryString = "?join=user,city,progress.updater";
+        $response = $service->getById($id, $queryString);
 
-        return view('pages.public.laporan.diterima-ai', ["title" => "Laporan Diterima AI", "data" => $counter]);
+        return view('pages.public.laporan.detail-laporan', ["title" => "Detail Laporan", "data" => $response]);
     }
 
-    public function laporanDetailDiterimaAi(Request $request)
+    public function laporanDiterimaAi(Request $request)
     {
-        $url = env("SERVER_URL", '') . '/public/reports/counter/diterima-ai';
+        $status_jalans = ["Tol", "Nasional", "Provinsi", "Kabupaten/Kota", "Desa"];
+        $cards = [];
+        foreach ($status_jalans as $jalan) {
+            $target = URL::to('/') . '/laporan-masuk?selected_status_jalan=' . $jalan;
+            if ($jalan == "Provinsi" || $jalan == "Desa" || $jalan == "Kabupaten/Kota") {
+                $target = URL::to('/') . '/laporan-diterima-ai/' . str_replace("/", "", $jalan);
+            }
 
-        return view('pages.public.laporan.diterima-ai-detail', ["title" => "Laporan Kerusakan Diterima", 'url' => $url]);
+            array_push($cards, [
+                'id' => 'card-jalan-' . strtolower(str_replace("/", "-", $jalan)),
+                'title' => 'Jalan ' . $jalan,
+                'data' => $jalan,
+                'url' => str_replace("/", "", $jalan),
+                'target' => $target
+            ]);
+        }
+
+        $url = env("SERVER_URL", '') . '/public/reports/counter/diterima-ai';
+        return view('pages.public.laporan.diterima-ai', ["title" => "Laporan Kerusakan Diterima", 'url' => $url, "cards" => $cards]);
+    }
+
+    public function laporanDiterimaAiProvinsi(Request $request)
+    {
+        $city_service = new CityService;
+        $wilayah = $city_service->getAllWilayah("per_page=all&filter[]=role_type,bpj&sort=name,asc");
+        $cards = [];
+
+        foreach ($wilayah->body as $element) {
+            $target = URL::to('/') . '/laporan-masuk?selected_status_jalan=Provinsi&selected_wilayah=' . $element->id;
+            array_push($cards, [
+                'id' => 'card-wilayah-' . $element->id,
+                'title' => 'Jalan ' . $element->name,
+                'data' => $element->id,
+                'url' => "Provinsi/bpj/" . $element->id,
+                'target' => $target
+            ]);
+        }
+
+        $url = env("SERVER_URL", '') . '/public/reports/counter/diterima-ai';
+        return view('pages.public.laporan.diterima-ai', ["title" => "Laporan Kerusakan Diterima", "subtitle" => "Jalan Provinsi", 'url' => $url, "cards" => $cards]);
+    }
+
+    public function laporanDiterimaAiByKota(Request $request)
+    {
+        $city_service = new CityService;
+        $cities = $city_service->getAllCities("per_page=all&sort=id,asc");
+        $cards = [];
+        $route = Route::getCurrentRoute()->getName();
+        $status_jalan = $route == "laporan-diterima-ai-kabupaten-kota" ? "Kabupaten/Kota" : "Desa";
+
+        foreach ($cities->body as $element) {
+            $target = URL::to('/') . '/laporan-masuk?selected_status_jalan=' . $status_jalan . '&selected_city=' . $element->id;
+            array_push($cards, [
+                'id' => 'card-wilayah-' . $element->id,
+                'title' => $element->name,
+                'data' => $element->id,
+                'url' => str_replace("/", "", $status_jalan) . "/city/" . $element->id,
+                'target' => $target
+            ]);
+        }
+
+        $url = env("SERVER_URL", '') . '/public/reports/counter/diterima-ai';
+        $subtitle = $route == "laporan-diterima-ai-kabupaten-kota"
+            ? "Jalan Kabupaten/Kota" : "Jalan Desa";
+        return view('pages.public.laporan.diterima-ai', ["title" => "Laporan Kerusakan Diterima", "subtitle" => $subtitle, 'url' => $url, "cards" => $cards]);
     }
 
     public function laporanDitolakAi(Request $request)
@@ -62,7 +128,7 @@ class PublicController extends Controller
 
     public function kontak(Request $request)
     {
-        return view('pages.public.kontak', ["title" => "Kontak", "active_menu" => "kontak"]);
+        return view('pages.public.kontak', ["title" => "Kontak Kami", "active_menu" => "kontak"]);
     }
 
     public function privacyPolicy(Request $request)

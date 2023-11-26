@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="container pt-5 pb-5">
-
-
+        <div class="title text-center mb-5">
+            <h2>{{ $title }}</h2>
+        </div>
         <x-card>
             <div class="row">
                 <div class="col">
@@ -86,6 +87,18 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="kota-kabupaten" class="form-label">BPJ</label>
+                                    <select class="form-control mb-2 mr-sm-2" name="selected_wilayah">
+                                        <option value="all">Semua BPJ</option>
+                                        @foreach ($list_of_data['wilayah'] as $wilayah)
+                                            <option {{ $wilayah->id == $filter['selected_wilayah'] ? 'selected' : '' }}
+                                                value="{{ $wilayah->id }}">
+                                                {{ $wilayah->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
                                     <label for="kota-kabupaten" class="form-label">Kota / Kabupaten</label>
                                     <select class="form-control mb-2 mr-sm-2" name="selected_city">
                                         <option value="all">Semua Kota/Kabupaten</option>
@@ -108,9 +121,7 @@
             </div>
         </x-card>
 
-
         <x-card title="Daftar Laporan">
-
             <div class="table-responsive">
                 <div class="d-flex justify-content-center" id="table-loading">
                     <div class="spinner-border" role="status" style="position:absolute;margin-top:105px">

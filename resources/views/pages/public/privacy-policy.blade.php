@@ -3,7 +3,7 @@
 @section('content')
     <div class="container pt-5 pb-5">
         <div class="title text-center mb-5">
-            <h2>Privacy - Policy</h2>
+            <h2>{{ $title }}</h2>
         </div>
         <x-card class="p-3">
             <div class="text-center mb-lg-4 mb-md-4 mb-sm-4 mb-4">

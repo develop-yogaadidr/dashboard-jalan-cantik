@@ -10,7 +10,9 @@
             <div class="card-footer" id="laporan-pages">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#"> < </a></li>
+                        <li class="page-item"><a class="page-link" href="#">
+                                < </a>
+                        </li>
                         <li class="page-item"><a class="page-link" href="#">...</a></li>
                         <li class="page-item"><a class="page-link" href="#"> > </a></li>
                     </ul>
@@ -320,7 +322,7 @@
                 let images = "";
                 element['images'].forEach(image => {
                     images += `
-                        <img src="${image_url}${image}" class="img-thumbnail shadow mr-2 d-inline-flex" style="width:150px;height:150px;object-fit: cover;"
+                        <img src="${image_url}${image}" class="img-thumbnail shadow mr-2 mb-3 d-inline-flex" style="width:150px;height:150px;object-fit: cover;"
                             alt="${image}" />`
                 });
 
@@ -336,7 +338,7 @@
                                 <span class="title title-big">${element['updater']}</span><br />
                                 <span>${element['info']}</span>
                             </div>
-                            <div>
+                            <div class="report-image-gallery" id="gallery-${element['status'].replace(" ", "-").toLowerCase()}">
                                 ${images}
                             </div>
                         </div>
@@ -345,6 +347,9 @@
             });
 
             $(`#progress`).html(content);
+            $(".report-image-gallery").each((index, element) => {
+                $(element).Gallery({})
+            })
         }
 
         function getUrlParams(url) {

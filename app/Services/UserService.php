@@ -12,7 +12,7 @@ class UserService extends ServiceBase
     public function getAll($queryString = "")
     {
         $repository = new UserRepository();
-        $responseDto = $this->buildResponse($repository->getAllData($queryString));
+        $responseDto = $repository->getAllData($queryString)->object();
 
         return $responseDto;
     }
@@ -36,7 +36,7 @@ class UserService extends ServiceBase
     public function getAllLevelAdmin($queryString = "")
     {
         $repository = new LevelAdminRepository();
-        $responseDto = $this->buildResponse($repository->getAllData($queryString));
+        $responseDto = $repository->getAllData($queryString)->object();
 
         return $responseDto;
     }
@@ -62,6 +62,7 @@ class UserService extends ServiceBase
         $dto = new UpdateLevelAdminDetailDto();
         $id = $input['id'];
         $dto->name = $input['name'];
+        $dto->role_type = $input['role_type'];
         $dto->city_ids = $input['city_ids'];
 
         $repository = new LevelAdminRepository();
