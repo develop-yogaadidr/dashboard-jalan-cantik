@@ -13,10 +13,27 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
         <!-- Nav Item - User Information -->
+        {{-- <li class="nav-item dropdown no-arrow mr-3">
+            <a class="nav-link dropdown-toggle position-relative" href="#" id="notificationDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="position-relative circle-container">
+                    <i class="fas fa-bell"></i>
+                    <span class="position-absolute top-30 start-100 translate-middle badge rounded-pill bg-danger">
+                        99+
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </div>
+            </a>
+        </li> --}}
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $profile->name }}</span>
+                <div class="text-right mr-2">
+                    <div><span class="mr-2 d-none d-lg-inline text-warning"
+                            style="font-weight:bold">{{ $profile->name }}</span></div>
+                    <div><span class="mr-2 d-none d-lg-inline small">{{ $profile->role }}</span></div>
+                </div>
+                <div class="circle-container text-white">{{ $profile->initial }}</div>
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -40,7 +57,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

@@ -23,10 +23,14 @@ class AuthService extends ServiceBase
             $request->session()->put('auth', $responseDto->body);
 
             $profile = $this->profile();
+
+            $name = explode(" ", $profile->body->name);
+            $profile->body->initial = ($name[0][0] ?? "") . ($name[1][0] ?? "");
+
             $request->session()->put('profile', $profile->body);
-            
+
             $admin_roles = ['Admin', 'Admin Provinsi', 'Admin Balai Nasional', 'Admin Balai Provinsi', 'Admin Kab/Kota', 'Pimpinan'];
-            if(!in_array($profile->body->role, $admin_roles)){
+            if (!in_array($profile->body->role, $admin_roles)) {
                 // if user role is not listed above
                 $response = new ResponseDto();
                 $response->body = null;

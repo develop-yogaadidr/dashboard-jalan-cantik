@@ -53,3 +53,16 @@ body {
 .hover-scale:hover {
     transform: scale(1.01);
 }
+
+.circle-container {
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    background-color: #f89002;
+    border-radius: 100%;
+}
+
+.bg-white {
+    background-color: #fafafa;
+}

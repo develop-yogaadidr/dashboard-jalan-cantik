@@ -35,7 +35,7 @@ jQuery.fn.extend({
             function generateFunction() {
                 $(`#${id} > img`).each(function (index, element) {
                     images +=
-                        `<img src="${element.src}" id="image-thumbnail-${index}" class="img-thumbnail shadow mr-2 mb-3 d-inline-flex" style="width:80px;height:80px;object-fit: cover;"  />`;
+                        `<img src="${element.src}" id="${id}-image-thumbnail-${index}" class="img-thumbnail shadow mr-2 mb-3 d-inline-flex" style="width:80px;height:80px;object-fit: cover;"  />`;
                     $(element).css("cursor", "pointer")
 
                     $(element).click(() => {
@@ -65,8 +65,6 @@ jQuery.fn.extend({
 
                 $(`#${id}-image-thumbnail-${index}`).addClass("bg-primary")
             }
-
-
         });
     }
 });

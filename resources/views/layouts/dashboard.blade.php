@@ -14,15 +14,16 @@
                             <div class="d-flex align-items-center">
                                 <!-- Page Heading -->
                                 @if (isset($title) && $title != '')
-                                    <h2 class="h4 mb-0 text-gray-800 pr-3" style="border-right:1px solid #eaeaea">{{ $title }}</h2>
+                                    <h2 class="h4 mb-0 text-gray-800 pr-3" style="border-right:1px solid #eaeaea">
+                                        {{ $title }}</h2>
                                 @endif
                             </div>
                         </div>
                         <div class="p-2 flex-grow-1 bd-highlight align-middle">@yield('navbar-content')</div>
-                        <div class="p-2 bd-highlight">
+                        <div class="p-2 bd-highlight align-middle">
                             @if (isset($breadcrumbs) && is_array($breadcrumbs))
                                 <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
                                         @foreach ($breadcrumbs as $breadcrumb)
                                             @if ($breadcrumb['link'] == '')
                                                 <li class="breadcrumb-item active" aria-current="page">
