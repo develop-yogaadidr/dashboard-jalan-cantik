@@ -158,19 +158,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            let url = ("{{ $url }}").replace(/&amp;/g, "&")
-            $(`#myTable`).Tables({
-                url: url,
-                entity: "reports",
-                columns: ["increment", "users.name", "reports.created_at", "type", "cities.name", "status",
-                    "button.detail"
-                ],
-                buttons: [{
-                    button: "detail",
-                    label: "Detail",
-                    action_url: "{{ URL::to('/') }}/laporan-masuk/{id}"
-                }]
-            });
+            
         })
     </script>
 @endsection

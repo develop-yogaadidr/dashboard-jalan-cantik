@@ -32,12 +32,12 @@
                                     <span class="input-group-text" id="email"><i class="fa fa-user"></i></span>
                                     <input name="email" type="text" class="form-control" placeholder="Email"
                                         aria-label="Email" aria-describedby="email" required
-                                        value="dpupurbalingga@gmail.com">
+                                        >
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="password"><i class="fa fa-lock"></i></span>
                                     <input name="password" type="password" class="form-control" placeholder="Password"
-                                        aria-label="Password" aria-describedby="password" required value="purbalingga123">
+                                        aria-label="Password" aria-describedby="password" required>
                                 </div>
                                 <div class="input-group mb-5">
                                     <div class="form-check">

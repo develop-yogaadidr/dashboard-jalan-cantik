@@ -233,7 +233,7 @@ return [
                 [
                     'id' => "laporan-ditolak-ai",
                     "name" => "Ditolak AI",
-                    "target" => "/laporan-masuk",
+                    "target" => "/laporan-ditolak-ai",
                 ]
             ]
         ],

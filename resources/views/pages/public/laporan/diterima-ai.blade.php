@@ -38,7 +38,7 @@
                         <div class="col-md-6 col-sm-120">
                             <div id="{{ $card['id'] }}-buttons" class="row gy-3 mb-4">
                             </div>
-                            <div style="width:450px;margin:auto">
+                            <div style="width:450px;margin:auto" id="{{ $card['id'] }}-graph-container">
                                 <canvas id="{{ $card['id'] }}-graph" width="200px" height="100px"></canvas>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
 
     <script>
         $(document).ready(function() {
-            let cards = <?= json_encode($cards); ?>;
+            let cards = <?= json_encode($cards) ?>;
             let base_url = ("{{ $url }}").replace(/&amp;/g, "&");
 
             init();
@@ -103,18 +103,24 @@
             }
 
             function populateGraph(response, id) {
+                console.log(response)
+                if (response.kinerja.total == 0) {
+                    $(`#${id}-graph-container`).html(
+                        `<div class="text-center text-small">Belum ada data kinerja penyelesaian</div>`);
+                    return;
+                }
+
                 const ctx = document.getElementById(`${id}-graph`);
-                let labels = response.kinerja.map(e => {
+                let labels = response.kinerja.data.map(e => {
                     return e.label
                 })
 
-                let percentage = response.kinerja.map(e => {
+                let percentage = response.kinerja.data.map(e => {
                     return e.percentage
                 })
 
                 new Chart(ctx, {
                     type: 'doughnut',
-
                     data: {
                         labels: labels,
                         datasets: [{

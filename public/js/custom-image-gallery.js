@@ -22,7 +22,7 @@ jQuery.fn.extend({
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <img src="" id="${id}-image"
-                                        style="max-height:calc(100vh - 200px); max-width:calc(100vw - 100px)">
+                                        style="max-height:calc(100vh - 100px); max-width:calc(100vw - 100px)">
                                 </div>
                                 <div class="modal-footer" style="align-self: center;justify-content:center" id="${id}-image-thumbnails">
                                 </div>
@@ -35,7 +35,7 @@ jQuery.fn.extend({
             function generateFunction() {
                 $(`#${id} > img`).each(function (index, element) {
                     images +=
-                        `<img src="${element.src}" id="${id}-image-thumbnail-${index}" class="img-thumbnail shadow mr-2 mb-3 d-inline-flex" style="width:80px;height:80px;object-fit: cover;"  />`;
+                        `<img src="${element.src}" id="${id}-image-thumbnail-${index}" class="img-thumbnail shadow mr-2 mb-3 d-inline-flex" style="width:64px;height:64px;object-fit: cover;"  />`;
                     $(element).css("cursor", "pointer")
 
                     $(element).click(() => {

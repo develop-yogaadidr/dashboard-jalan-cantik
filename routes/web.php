@@ -33,7 +33,12 @@ Route::get('/download', [PublicController::class, 'download']);
 Route::get('/kontak', [PublicController::class, 'kontak']);
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicy']);
 
-Route::get('login', [AuthController::class, 'login'])->name("login");
+if (env("APP_ENV", "production") == "local") {
+    Route::get('login', [AuthController::class, 'loginDevelopment'])->name("login");
+} else {
+    Route::get('login', [AuthController::class, 'login'])->name("login");
+}
+
 Route::post('login', [AuthController::class, 'loginProcess']);
 
 Route::prefix("data")->group(function () {

@@ -1,0 +1,67 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					110.5896606449229,
+					-7.714741229923796
+				]
+			},
+			"properties": {
+				"styleUrl": "#style0",
+				"styleHash": "-4acdd914",
+				"OBJECTID": 0,
+				"Kl_Dat_Das": null,
+				"Nm_Ruas": "JLN. KARTINI (KLATEN)",
+				"Thn_Data": 0,
+				"Status": "Jalan Nasional",
+				"Fungsi": null,
+				"Mendukung": null,
+				"Ura_Dukung": null,
+				"Kd_Bd_PU": null,
+				"Kd_Jns_Inf": null,
+				"Kd_Inf": null,
+				"Propinsi": null,
+				"Kab_Kot": null,
+				"Kecamatan": null,
+				"Desa_Kel": null,
+				"Tk_Ruas_Aw": null,
+				"Tk_Ruas_Ak": null,
+				"Kd_Patok": null,
+				"Km_Awal": 0,
+				"Km_Akhir": 0,
+				"Nm_Lintas": null,
+				"Kon_Baik": 0,
+				"Kon_Sdg": 0,
+				"Kon_Rgn": 0,
+				"Kon_Rusak": 0,
+				"Kon_Mntp": 0,
+				"Kon_T_Mntp": 0,
+				"Panjang": 2.36925,
+				"Lbr_Keras": 0,
+				"LHRT": 0,
+				"VCR": 0,
+				"Tipe_Jln": 0,
+				"MST": 0,
+				"Tanah_Kri": 0,
+				"Macadam": 0,
+				"Aspal": 0,
+				"Rigid": 0,
+				"Thn_Pen_Ak": 0,
+				"Jns_Pen": null,
+				"Koord_X_Aw": 0,
+				"Koord_Y_Aw": 0,
+				"Koord_X_Ak": 0,
+				"Koord_Y_Ak": 0,
+				"Shape_Leng": 0,
+				"BPT": "SURAKARTA",
+				"KodeNas": 215,
+				"KML_FOLDER": "Jalan_Prov_Jateng_BPT",
+				"NAMA_RUAS": "JLN. KARTINI (KLATEN)"
+			}
+		}
+	]
+}

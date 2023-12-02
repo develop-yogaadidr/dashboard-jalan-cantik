@@ -13,10 +13,13 @@ class PublicController extends Controller
     public function index(Request $request)
     {
         $service = new ReportService();
+        $city_service = new CityService;
+        $cities = $city_service->getAllCities("per_page=all&sort=id,asc");
+
         $counter_total_laporan = $service->getCounterTotalLaporan();
         $counter_laporan_publik = $service->getCounterLaporanDiterimaAi();
 
-        return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda", "counter" => ["total" => $counter_total_laporan, "publik" => $counter_laporan_publik]]);
+        return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda", "cities" => $cities, "counter" => ["total" => $counter_total_laporan, "publik" => $counter_laporan_publik]]);
     }
 
     public function tentang(Request $request)
@@ -118,7 +121,16 @@ class PublicController extends Controller
 
     public function laporanDitolakAi(Request $request)
     {
-        return view('pages.public.laporan.daftar-laporan', ["title" => "Laporan Ditolak AI"]);
+        $filter = $this->populateFilter($request);
+        $url = env("SERVER_URL", '') . '/public/reports/ditolak-ai?join=user' . $filter['wilayah'] . $filter['year'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'];
+
+        return view('pages.public.laporan.daftar-laporan-ditolak', [
+            "title" => "Laporan Ditolak AI",
+            "url" => $url,
+            "filter_counter" => $filter['counter'],
+            "filter" => $filter['selected_data'],
+            "list_of_data" => $this->getListOfFilterData()
+        ]);
     }
 
     public function download(Request $request)

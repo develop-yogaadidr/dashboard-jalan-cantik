@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AuthService;
+use App\Services\CityService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -10,6 +11,14 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         return view('pages.public.login', ["title" => "Login"]);
+    }
+
+    public function loginDevelopment(Request $request)
+    {
+        $city_service = new CityService;
+        $cities = $city_service->getAllCities("per_page=all&sort=id,asc");
+        
+        return view('pages.public.login-develop', ["title" => "Login"]);
     }
 
     public function loginProcess(Request $request)
