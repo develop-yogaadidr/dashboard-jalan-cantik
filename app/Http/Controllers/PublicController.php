@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CityService;
 use App\Services\ReportService;
+use App\Services\RoadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -13,8 +14,9 @@ class PublicController extends Controller
     public function index(Request $request)
     {
         $service = new ReportService();
-        $city_service = new CityService;
-        $cities = $city_service->getAllCities("per_page=all&sort=id,asc");
+
+        $road_service = new RoadService;
+        $cities = $road_service->getAll("filter[]=type,city&per_page=all&sort=id,asc");
 
         $counter_total_laporan = $service->getCounterTotalLaporan();
         $counter_laporan_publik = $service->getCounterLaporanDiterimaAi();

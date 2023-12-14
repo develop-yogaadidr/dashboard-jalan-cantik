@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-7" style="background:#FCE9C6; border-left:1px solid #cacaca">
                         <div class="px-5 py-4" style="position:absolute; right:0">
-                            <a href="{{ URL::to('/') }}" class="text-warning">
+                            <a href="{{ URL::to('/') }}" class="text-dark">
                                 <h2><i class="fa fa-home"></i></h2>
                             </a>
                         </div>
@@ -27,17 +27,18 @@
                                 </div>
                             @endif
 
-                            <x-form method="post" action="login" need-validation class="row">
+                            <x-form method="post" action="login-development" need-validation class="row">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="email"><i class="fa fa-user"></i></span>
-                                    <input name="email" type="text" class="form-control" placeholder="Email"
+                                    <input name="email" type="text" disabled class="form-control" placeholder="Email"
                                         aria-label="Email" aria-describedby="email" required
-                                        value="dpupurbalingga@gmail.com">
+                                        value="contoh-username@gmail.com">
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="password"><i class="fa fa-lock"></i></span>
-                                    <input name="password" type="password" class="form-control" placeholder="Password"
-                                        aria-label="Password" aria-describedby="password" required value="purbalingga123">
+                                    <input name="password" disabled type="password" class="form-control"
+                                        placeholder="Password" aria-label="Password" aria-describedby="password" required
+                                        value="contoh-password">
                                 </div>
                                 <div class="input-group mb-5">
                                     <div class="form-check">
@@ -48,8 +49,15 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <button class="btn btn-warning" style="width:100px" type="submit">Login</button>
+                                <h6>Login sebagai:</h6>
+                                <span>Ini untuk masa development, untuk memudahkan login user</span>
+                                <div style="flex">
+                                    <button class="btn btn-warning mb-2 btn-sm" type="submit" name="role"
+                                        value="pimpinan">Pimpinan</button>
+                                    <button class="btn btn-warning mb-2 btn-sm" type="submit" name="role"
+                                        value="admin_provinsi">Admin Provinsi</button>
+                                    <button class="btn btn-warning mb-2 btn-sm" type="submit" name="role"
+                                        value="admin_kabupaten_kota">Admin Kota/Kabupaten</button>
                                 </div>
                             </x-form>
                         </div>

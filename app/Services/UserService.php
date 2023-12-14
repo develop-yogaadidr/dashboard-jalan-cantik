@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Models\Dtos\UpdateAdminRequestDto;
 use App\Models\Dtos\UpdateLevelAdminDetailDto;
+use App\Models\Dtos\UpdateProfileRequestDto;
 use App\Repositories\LevelAdminRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class UserService extends ServiceBase
 {
@@ -84,5 +86,37 @@ class UserService extends ServiceBase
         $responseDto = $this->buildResponse($repository->update($id, $dto));
 
         return $responseDto;
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $input = $request->all();
+        $dto = new UpdateProfileRequestDto();
+        $id = $input['id'];
+        $dto->name = $input['name'];
+        $dto->email = $input['email'];
+        $dto->phone = $input['phone'];
+        $dto->twitter = $input['twitter'];
+        $dto->address = $input['address'];
+
+        $repository = new UserRepository();
+
+        if($request->file('photo') != null){
+            $this->buildResponse($repository->updatePhoto($request));
+        }
+
+        $responseUpdateProfile = $this->buildResponse($repository->update($id, $dto));
+
+        if ($responseUpdateProfile->ok()) {
+            $auth_service = new AuthService();
+            $profile = $auth_service->profile();
+
+            $name = explode(" ", $profile->body->name);
+            $profile->body->initial = ($name[0][0] ?? "") . ($name[1][0] ?? "");
+
+            $request->session()->put('profile', $profile->body);
+        }
+
+        return $responseUpdateProfile;
     }
 }

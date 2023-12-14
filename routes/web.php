@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\RoadController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureSessionIsValid;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +42,9 @@ if (env("APP_ENV", "production") == "local") {
 }
 
 Route::post('login', [AuthController::class, 'loginProcess']);
+if (env("APP_ENV", "production") == "local") {
+    Route::post('login-development', [AuthController::class, 'loginDevelopmentProcess']);
+}
 
 Route::prefix("data")->group(function () {
     Route::get('/laporan', [PublicController::class, 'getDataLaporan']);
@@ -59,9 +64,19 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
         Route::post('/{id}/{status}/create', [LaporanController::class, 'createProsesLaporan']);
     });
 
+    Route::prefix("profile")->group(function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::post('/update', [ProfileController::class, 'updateProfile']);
+    });
+
     Route::get('/kelola-ai', [ConfigController::class, 'kelolaAi']);
-    Route::get('/kelola-peta', [DashboardController::class, 'kelolaPeta']);
     Route::post('/update-ai', [ConfigController::class, 'updateAi']);
+
+    Route::prefix("kelola-peta")->group(function () {
+        Route::get('/', [RoadController::class, 'index']);
+        Route::post('/update', [RoadController::class, 'update']);
+        Route::get('/{id}', [RoadController::class, 'detail']);
+    });
 
     Route::get('/daftar-user', [UserController::class, 'index']);
     Route::get('/daftar-user/admin', [UserController::class, 'getUserAdmin']);
@@ -80,5 +95,6 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
         Route::get('/user/admin', [UserController::class, 'getUserDataAdmin']);
         Route::get('/user/pelapor', [UserController::class, 'getUserDataPelapor']);
         Route::get('/level-admin', [UserController::class, 'getLevelAdminsData']);
+        Route::get('/roads', [RoadController::class, 'getDataRoads']);
     });
 });

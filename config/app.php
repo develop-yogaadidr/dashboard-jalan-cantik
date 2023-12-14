@@ -324,12 +324,14 @@ return [
                     'name' => 'Dashboard',
                     'target' => 'dashboard',
                     'icon' => 'fa-tachometer-alt',
+                    'roles' => ['*']
                 ],
                 [
                     'id' => 'laporan-masuk',
                     'name' => 'Laporan Masuk',
                     'target' => '',
                     'icon' => 'fa-file',
+                    'roles' => ['*'],
                     'sub-items' => [
                         [
                             'id' => 'status-jalan',
@@ -348,12 +350,14 @@ return [
                     'name' => 'Kelola AI',
                     'target' => 'dashboard/kelola-ai',
                     'icon' => 'fa-microchip',
+                    'roles' => ['Admin Provinsi', 'Pimpinan']
                 ],
                 [
                     'id' => 'kelola-user',
                     'name' => 'Kelola User',
                     'target' => 'dashboard/kelola-user',
                     'icon' => 'fa-users',
+                    'roles' => ['Admin Provinsi', 'Pimpinan'],
                     'sub-items' => [
                         [
                             'id' => 'daftar-user',
@@ -382,6 +386,7 @@ return [
                     'name' => 'Kelola Peta Jalan',
                     'target' => 'dashboard/kelola-peta',
                     'icon' => 'fa-map',
+                    'roles' => ['Admin Provinsi', 'Pimpinan']
                 ],
             ],
         ],

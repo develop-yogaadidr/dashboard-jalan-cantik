@@ -103,7 +103,6 @@
             }
 
             function populateGraph(response, id) {
-                console.log(response)
                 if (response.kinerja.total == 0) {
                     $(`#${id}-graph-container`).html(
                         `<div class="text-center text-small">Belum ada data kinerja penyelesaian</div>`);

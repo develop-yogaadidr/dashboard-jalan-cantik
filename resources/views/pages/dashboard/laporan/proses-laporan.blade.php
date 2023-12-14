@@ -21,7 +21,7 @@
             @foreach ($images as $image)
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Gambar 1</label>
-                    <input class="form-control" type="file" name="{{ $image }}" id="{{ $image }}">
+                    <input class="form-control" type="file" accept="image/*" name="{{ $image }}" id="{{ $image }}">
                 </div>
             @endforeach
             <button class="btn btn-outline-secondary" onclick="history.back()" type="button"

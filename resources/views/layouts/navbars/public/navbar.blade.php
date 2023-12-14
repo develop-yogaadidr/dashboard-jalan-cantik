@@ -4,6 +4,13 @@
     $button = $profile == null ? ['title' => 'Login', 'target' => URL::to('/') . '/login'] : ['title' => 'Dashboard', 'target' => URL::to('/') . '/dashboard'];
 @endphp
 
+<style>
+.navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .show>.nav-link {
+    color: #fbd12d;
+    font-weight: bold;
+}
+</style>
+
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark shadow">
     <div class="container-fluid">
         <div class="navbar-brand" href="#">

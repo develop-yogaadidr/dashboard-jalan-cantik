@@ -17,8 +17,41 @@ class AuthController extends Controller
     {
         $city_service = new CityService;
         $cities = $city_service->getAllCities("per_page=all&sort=id,asc");
-        
+
         return view('pages.public.login-develop', ["title" => "Login"]);
+    }
+
+    public function loginDevelopmentProcess(Request $request)
+    {
+        if (env("APP_ENV", "production") != "local") {
+            return redirect('login')->with('warning', "Unauthorized");
+        }
+
+        $users = [
+            "pimpinan" => [
+                "email" => "pimpinan@mail.com",
+                "password" => "Password2022"
+            ],
+            "admin_provinsi" => [
+                "email" => "adminprovinsi@mail.com",
+                "password" => "Password2022"
+            ],
+            "admin_kabupaten_kota" => [
+                "email" => "dpupurbalingga@gmail.com",
+                "password" => "purbalingga123"
+            ],
+        ];
+
+        $service = new AuthService;
+        $request['email'] = $users[$request['role']]['email'];
+        $request['password'] = $users[$request['role']]['password'];
+        $response = $service->login($request);
+
+        if ($response->ok()) {
+            return redirect('dashboard');
+        } else {
+            return redirect('login')->with('warning', $response->message);
+        }
     }
 
     public function loginProcess(Request $request)
@@ -28,7 +61,7 @@ class AuthController extends Controller
 
         if ($response->ok()) {
             return redirect('dashboard');
-        }else{
+        } else {
             return redirect('login')->with('warning', $response->message);
         }
     }
@@ -40,7 +73,7 @@ class AuthController extends Controller
 
         if ($response->ok()) {
             return redirect('/');
-        }else{
+        } else {
             return redirect('dashboard');
         }
     }

@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-7" style="background:#FCE9C6; border-left:1px solid #cacaca">
                         <div class="px-5 py-4" style="position:absolute; right:0">
-                            <a href="{{ URL::to('/') }}" class="text-warning">
+                            <a href="{{ URL::to('/') }}" class="text-dark">
                                 <h2><i class="fa fa-home"></i></h2>
                             </a>
                         </div>

@@ -152,7 +152,7 @@
         <div class="container">
             <x-card class="p-5 text-center">
                 <div class="d-inline-flex mb-5">
-                    <div class="text-center h3 lh-base mb-4">Laporan Publik</div>
+                    <div class="text-center h3 lh-base mb-4">Laporan Diterima AI</div>
                 </div>
                 <div class="row gy-4 justify-content-md-center">
                     @foreach ($counter['publik']->body->details as $element)
@@ -353,10 +353,10 @@
                 {
                     group: "Titik Laporan",
                     collapsed: true,
-                    layers: jalanKabKota.body.map((element) => {
+                    layers: jalanKabKota.map((element) => {
                         return getGeoInfoPoint({
                             name: element.name,
-                            url: `{{ env('SERVER_URL', '') }}/public/reports/geojson/${element.id}`,
+                            url: `{{ env('SERVER_URL', '') }}/public/reports/geojson/${element.city_id}`,
                             color: "#35CA3D"
                         })
                     })
@@ -364,11 +364,10 @@
                 {
                     group: "Jalan Kabupaten Kota",
                     collapsed: true,
-                    layers: jalanKabKota.body.map((element) => {
-                        let nama = element.name.replace(" ", "_").replace(".", "").toLowerCase();
+                    layers: jalanKabKota.map((element) => {
                         return getGeoInfoLines({
                             name: element.name,
-                            url: "{{ asset('public/geojson/kab_kota') }}" + `/${nama}.geojson`,
+                            url: "{{ env('IMAGE_SERVER', '') }}" + `${element.geojson_url}`,
                             color: "#111111",
                             action: popUpJalanKota,
                             open_default: false

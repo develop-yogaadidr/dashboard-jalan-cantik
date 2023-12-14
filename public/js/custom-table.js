@@ -101,6 +101,11 @@ $(document).ready(async function () {
                     return;
                 }
 
+                if(value == null || value == ''){
+                    body += `<td>-</td>`;
+                    return;
+                }
+
                 if (!Number.isInteger(value)) {
                     var date = new Date(value);
                     if (date instanceof Date && !isNaN(date)) {
@@ -133,8 +138,9 @@ $(document).ready(async function () {
         var regExp = /\{([^)]+)\}/;
         var matches = regExp.exec(button[0].action_url);
         let action_url = button[0].action_url.replace(matches[0], report[matches[1]])
+        let target = button[0].target == null ? '' : `target="${button[0]['target']}"`
 
-        return `<a href="${action_url}" class="btn btn-outline-warning">${button[0].label}</a>`;
+        return `<a href="${action_url}" ${target} class="btn btn-outline-warning">${button[0].label}</a>`;
     }
 
     function generatePagination(dataResponse) {
