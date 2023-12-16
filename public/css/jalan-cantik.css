@@ -1,3 +1,19 @@
+.bg-color-blue-pupr{
+    background-color: #354777 !important;
+}
+
+.bg-color-yellow-pupr{
+    background-color: #ffc728 !important;
+}
+
+.color-blue-pupr{
+    color: #354777 !important;
+}
+
+.color-yellow-pupr{
+    color: #ffc728 !important;
+}
+
 body {
     font-family: 'Montserrat';
     font-size: 14px;

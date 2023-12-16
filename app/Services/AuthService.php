@@ -29,7 +29,7 @@ class AuthService extends ServiceBase
 
             $request->session()->put('profile', $profile->body);
 
-            $admin_roles = ['Admin', 'Admin Provinsi', 'Admin Balai Nasional', 'Admin Balai Provinsi', 'Admin Kab/Kota', 'Pimpinan'];
+            $admin_roles = ['Admin', 'Admin Provinsi', 'Admin Balai Nasional', 'Admin Balai Provinsi', 'Admin Kab/Kota'];
             if (!in_array($profile->body->role, $admin_roles)) {
                 // if user role is not listed above
                 $response = new ResponseDto();

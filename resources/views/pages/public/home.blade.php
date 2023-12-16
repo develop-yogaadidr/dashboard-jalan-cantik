@@ -38,7 +38,6 @@
             transform: translate(-50%, -50%);
             max-width: 800px;
             color: #fff;
-            font-family: 'Roboto', sans-serif;
         }
 
         .header-info {
@@ -46,7 +45,6 @@
             top: 20%;
             right: 10%;
             color: #fff;
-            font-family: 'Roboto', sans-serif;
             align-items: center;
         }
 
@@ -91,7 +89,7 @@
         }
     </style>
     <section class="header mb-5">
-        <img class="header-image" src="{{ URL::to('/') . '/public/images/beranda.png' }}" alt="Five developers at work.">
+        <img class="header-image" src="{{ URL::to('/') . '/public/images/beranda.jpg' }}" alt="Five developers at work.">
         <div class="header-tagline">
             <p class="text-white font-weight-bold h2 mb-4 lh-base">Mari Kita Bangun Bersama Provinsi Jawa Tengah<br />
                 Dengan Melaporkan Jalan<br />
@@ -330,25 +328,24 @@
             }
 
             var jalanKabKota = <?= json_encode($cities) ?>;
+            var area = <?= json_encode($area) ?>;
+            var jalanNasionalProvinsi = <?= json_encode($nasional_provinsi) ?>;
+
+            console.log(jalanNasionalProvinsi)
+
             let overLayers = [{
                     group: "Jalan",
                     collapsed: true,
-                    layers: [
-                        getGeoInfoLines({
-                            name: "Jalan Provinsi",
-                            url: "{{ asset('public/geojson/jalan_provinsi.geojson') }}",
-                            color: "#0000ff",
-                            action: popUpJalanProvinsi,
+                    layers: jalanNasionalProvinsi.map((element) => {
+                        return getGeoInfoLines({
+                            name: element.name,
+                            url: "{{ env('GEOJSON_SERVER', '') }}" + `${element.geojson_url}`,
+                            color: element.type == "provinsi" ? "#0000ff" : "#f60404",
+                            action: element.type == "provinsi" ? popUpJalanProvinsi :
+                                popUpJalanNasional,
                             open_default: true
-                        }),
-                        getGeoInfoLines({
-                            name: "Jalan Nasional",
-                            url: "{{ asset('public/geojson/jalan_nasional.geojson') }}",
-                            color: "#f60404",
-                            action: popUpJalanNasional,
-                            open_default: true
-                        }),
-                    ]
+                        })
+                    })
                 },
                 {
                     group: "Titik Laporan",
@@ -367,7 +364,7 @@
                     layers: jalanKabKota.map((element) => {
                         return getGeoInfoLines({
                             name: element.name,
-                            url: "{{ env('IMAGE_SERVER', '') }}" + `${element.geojson_url}`,
+                            url: "{{ env('GEOJSON_SERVER', '') }}" + `${element.geojson_url}`,
                             color: "#111111",
                             action: popUpJalanKota,
                             open_default: false
@@ -377,13 +374,15 @@
                 {
                     group: "Batas BPJ",
                     collapsed: true,
-                    layers: [getGeoInfoLines({
-                        name: "Batas BPJ",
-                        url: "{{ asset('public/geojson/batas_BPJ.geojson') }}",
-                        color: "#35CA3D",
-                        action: popUpBatasBpj,
-                        open_default: false
-                    })]
+                    layers: area.map((element) => {
+                        return getGeoInfoLines({
+                            name: element.name,
+                            url: "{{ env('GEOJSON_SERVER', '') }}" + `${element.geojson_url}`,
+                            color: "#35CA3D",
+                            action: popUpBatasBpj,
+                            open_default: false
+                        })
+                    })
                 }
             ]
 

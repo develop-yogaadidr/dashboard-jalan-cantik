@@ -11,7 +11,8 @@
 }
 </style>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark shadow">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark bg-color-blue-pupr shadow">
+{{-- <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark shadow"> --}}
     <div class="container-fluid">
         <div class="navbar-brand" href="#">
             <img src="{{ asset('public/images/jalan-cantik.png') }}" alt="Logo" width="72" height="72"

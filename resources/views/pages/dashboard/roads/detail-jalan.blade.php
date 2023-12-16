@@ -25,7 +25,7 @@
                         class="btn btn-outline-warning mb-4" type="button">Unduh File Geojson</a>
                     <button class="btn btn-outline-primary mb-4" id="ubah-file" type="button">Perbarui File</button>
                     <input class="form-control" type="file" style="display:none" name="geojson_file" id="geojson_file"
-                        accept="application/JSON">
+                        accept="file">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary mb-4" id="save" type="submit">Simpan</button>

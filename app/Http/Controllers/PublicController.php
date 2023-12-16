@@ -17,11 +17,13 @@ class PublicController extends Controller
 
         $road_service = new RoadService;
         $cities = $road_service->getAll("filter[]=type,city&per_page=all&sort=id,asc");
+        $nasional_provinsi = $road_service->getAll("filter[]=type,nasional,OR&filter[]=type,provinsi,OR&per_page=all&sort=id,asc");
+        $area = $road_service->getAll("filter[]=type,area&per_page=all&sort=id,asc");
 
         $counter_total_laporan = $service->getCounterTotalLaporan();
         $counter_laporan_publik = $service->getCounterLaporanDiterimaAi();
 
-        return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda", "cities" => $cities, "counter" => ["total" => $counter_total_laporan, "publik" => $counter_laporan_publik]]);
+        return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda", "cities" => $cities, "area" => $area, "nasional_provinsi" => $nasional_provinsi, "counter" => ["total" => $counter_total_laporan, "publik" => $counter_laporan_publik]]);
     }
 
     public function tentang(Request $request)
