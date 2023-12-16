@@ -17,7 +17,7 @@
     <script>
         $(document).ready(function() {
             let url = ("{{ $url }}").replace(/&amp;/g, "&")
-            let download_url = "{{env('IMAGE_SERVER', '')}}";
+            let download_url = "{{env('GEOJSON_SERVER', '')}}";
             $(`#myTable`).Tables({
                 url: url,
                 columns: ["increment", "roads.name", "cities.name", "button.detail", "button.download"],

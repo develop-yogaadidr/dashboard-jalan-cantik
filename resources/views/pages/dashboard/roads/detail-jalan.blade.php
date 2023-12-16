@@ -21,7 +21,7 @@
                     </x-forms.select>
                 </div>
                 <div class="form-group">
-                    <a href="{{ env('IMAGE_SERVER', '') . $data->body->geojson_url }}" target="_blank"
+                    <a href="{{ env('GEOJSON_SERVER', '') . $data->body->geojson_url }}" target="_blank"
                         class="btn btn-outline-warning mb-4" type="button">Unduh File Geojson</a>
                     <button class="btn btn-outline-primary mb-4" id="ubah-file" type="button">Perbarui File</button>
                     <input class="form-control" type="file" style="display:none" name="geojson_file" id="geojson_file"
