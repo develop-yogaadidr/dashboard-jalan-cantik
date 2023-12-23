@@ -23,7 +23,6 @@ $(document).ready(async function () {
     let page = "page=1";
     let selected_id = -1;
 
-
     init();
     function init() {
         if (dataTable.url == "") return;

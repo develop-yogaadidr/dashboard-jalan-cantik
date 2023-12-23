@@ -21,7 +21,7 @@
                             <div class="pr-4 mr-4" style="border-right: 1px solid #eaeaea">
                                 <span class="title title-big title-primary">No Laporan {{ $data->body->id }}</span><br />
                                 <span
-                                    class="text-label">{{ date_format(date_create($data->body->created_at), 'd/m/Y H:i:s') }}</span>
+                                    class="text-label">{{ formatDateTime($data->body->created_at) }}</span>
                             </div>
                             <div>
                                 <span class="chip text-white bg-{{ $color[$data->body->status] }}">
@@ -77,7 +77,7 @@
                             $progress = [
                                 [
                                     'status' => 'Diterima',
-                                    'date' => date_format(date_create($data->body->created_at), 'd/m/Y H:i:s'),
+                                    'date' => formatDateTime($data->body->created_at),
                                     'updater' => $data->body->user->name,
                                     'info' => '',
                                     'color' => $color['Diterima'],
@@ -88,7 +88,7 @@
                             foreach ($data->body->progress as $element) {
                                 array_push($progress, [
                                     'status' => $element->status,
-                                    'date' => date_format(date_create($element->created_at), 'd/m/Y H:i:s'),
+                                    'date' => formatDateTime($element->created_at),
                                     'updater' => $element->updater->name,
                                     'info' => $element->info,
                                     'color' => $color[$element->status],

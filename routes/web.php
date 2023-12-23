@@ -57,9 +57,11 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
 
     Route::prefix("laporan")->group(function () {
         Route::get('/', [LaporanController::class, 'daftarLaporanByStatus']);
+        Route::get('/download', [LaporanController::class, 'downloadExcel']);
         Route::get('/status-jalan', [LaporanController::class, 'statusJalan']);
         Route::get('/kasus-jalan', [LaporanController::class, 'kasusJalan']);
         Route::get('/{id}', [LaporanController::class, 'detailLaporan']);
+        Route::get('/{id}/download', [LaporanController::class, 'downloadDetailAsPdf']);
         Route::get('/{id}/{status}', [LaporanController::class, 'prosesLaporan']);
         Route::post('/{id}/{status}/create', [LaporanController::class, 'createProsesLaporan']);
     });

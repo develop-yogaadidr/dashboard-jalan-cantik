@@ -135,7 +135,7 @@
                     @foreach ($foto_pelapor as $photo)
                         <div class="col-4">
                             <img src="{{ $image_url . $photo }}" class="w-100 shadow-1-strong rounded mb-4"
-                                alt="Boat on Calm Water" />
+                                alt="image laporan" />
                         </div>
                     @endforeach
                 </div>
@@ -151,7 +151,7 @@
                         @foreach ($data_pengerjaan->images as $photo)
                             <div class="col-4">
                                 <img src="{{ $image_url . $photo }}" class="w-100 shadow-1-strong rounded mb-4"
-                                    alt="Boat on Calm Water" />
+                                    alt="image laporan" />
                             </div>
                         @endforeach
                     </div>
@@ -173,7 +173,7 @@
                             @foreach ($data_selesai->images as $photo)
                                 <div class="col-4">
                                     <img src="{{ $image_url . $photo }}" class="w-100 shadow-1-strong rounded mb-4"
-                                        alt="Boat on Calm Water" />
+                                        alt="image laporan" />
                                 </div>
                             @endforeach
                         @endif

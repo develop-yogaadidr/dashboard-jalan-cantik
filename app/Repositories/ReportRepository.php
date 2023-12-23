@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class ReportRepository extends BaseRepository
 {
@@ -24,11 +25,23 @@ class ReportRepository extends BaseRepository
 
         return $response;
     }
-    
+
     public function getCounterKasusJalan()
     {
         $response = Http::withToken($this->token)->get($this->base_url . '/counter/type');
 
         return $response;
+    }
+
+    public function download($queryString = "")
+    {
+        $date = date("d-m-Y H:i");
+        $response = Http::withToken($this->token)->withHeaders([
+            'accept' => 'application/octet-stream',
+        ])->get($this->base_url . '/download' . "?" . $queryString);
+
+        return response()->streamDownload(function () use ($response) {
+            echo $response->getBody()->getContents();
+        }, 'Export laporan '.$date.'.xlsx');
     }
 }

@@ -22,7 +22,6 @@ class PublicController extends Controller
 
         $counter_total_laporan = $service->getCounterTotalLaporan();
         $counter_laporan_publik = $service->getCounterLaporanDiterimaAi();
-
         return view('pages.public.home', ["title" => "Beranda", "active_menu" => "beranda", "cities" => $cities, "area" => $area, "nasional_provinsi" => $nasional_provinsi, "counter" => ["total" => $counter_total_laporan, "publik" => $counter_laporan_publik]]);
     }
 
@@ -34,7 +33,7 @@ class PublicController extends Controller
     public function laporanMasuk(Request $request)
     {
         $filter = $this->populateFilter($request);
-        $url = env("SERVER_URL", '') . '/reports?join=user' . $filter['wilayah'] . $filter['year'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'];
+        $url = env("SERVER_URL", '') . '/reports?join=user' . $filter['wilayah'] . $filter['year'] . $filter['month']  . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'];
 
         return view('pages.public.laporan.daftar-laporan', [
             "title" => "Laporan Masuk",

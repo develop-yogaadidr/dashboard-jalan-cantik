@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CityService;
 use App\Services\ReportService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -124,9 +125,7 @@ class LaporanController extends Controller
         $service = new ReportService;
         $counter_status = $service->getCounterStatusLaporan();
 
-        $url = URL::to('/') . "/dashboard/data/laporan?join=user,progress.updater" . $filter['year'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'];
-        session()->put('link-laporan', $request->url());
-        session()->put('link-laporan-querystring', $request->getQueryString());
+        $url = URL::to('/') . "/dashboard/data/laporan?join=user,progress.updater" . $filter['year'] . $filter['month'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'];
 
         return view('pages.dashboard.laporan.daftar-laporan', [
             "title" => "Daftar Laporan ", "active_menu" => "dashboard", "url" => $url,
@@ -136,6 +135,31 @@ class LaporanController extends Controller
             "filter" => $filter['selected_data'],
             "list_of_data" => $this->getListOfFilterData(true)
         ]);
+    }
+
+    public function downloadExcel(Request $request)
+    {
+        $filter = $this->populateFilter($request);
+        $service = new ReportService;
+        $filter_image = $request['with_image'] == "on" ? "&with_image=true" : "";
+        $queryString = "?join=user,city" . $filter['year'] . $filter['month'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'] . $filter_image;
+        $response = $service->download($queryString);
+
+        return $response;
+    }
+
+    public function downloadDetailAsPdf(Request $request, $id)
+    {
+        $service = new ReportService;
+        $queryString = "?join=user,city,progress";
+        $response = $service->getById($id, $queryString);
+        $url = URL::to('/') . '/laporan-masuk/' . $id;
+
+        $pdf = Pdf::loadView('pdf/detail-laporan', ["data" => $response, "url" => $url]);
+        return $pdf->download("Detail Laporan " . $id . ".pdf");
+
+
+        return view('pdf/detail-laporan', ["data" => $response, "url" => $url]);
     }
 
     // Data Purposes

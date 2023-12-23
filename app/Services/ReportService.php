@@ -57,6 +57,15 @@ class ReportService extends ServiceBase
         return $responseDto;
     }
 
+    
+    public function download($queryString)
+    {
+        $repository = new ReportRepository();
+        $response = $repository->download($queryString);
+        
+        return $response;
+    }
+
     public function createProgress(Request $request)
     {
         $repository = new ProgressReporitory();

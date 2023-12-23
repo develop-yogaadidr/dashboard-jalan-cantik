@@ -11,8 +11,10 @@
         @endif
     </title>
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/images/favicon.ico') }}">
+
     <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="{{ asset('public/css/font-montserrat.css') }}" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="{{ asset('public/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -26,5 +28,4 @@
     <script src="{{ asset('public/vendor/jquery/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('public/vendor/jquery/jquery.countup.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-
 </head>

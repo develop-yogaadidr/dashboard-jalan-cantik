@@ -11,8 +11,10 @@
         @endif
     </title>
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/images/favicon.ico') }}">
+
     <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="{{ asset('public/css/font-montserrat.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('public/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/sb-admin-2.css') }}" rel="stylesheet">

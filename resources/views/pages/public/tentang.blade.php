@@ -21,22 +21,22 @@
         <div class="row">
             <div class="col-md-7 col-sm-12">
                 <div class="row gy-4">
-                    <div class="col-md-6 col-sm-12"><img class="img image-tentang shadow mr-2 d-inline-flex"
+                    <div class="col-md-6 col-sm-12 show-on-scroll" animate-delay="100"><img class="img image-tentang shadow mr-2 d-inline-flex"
                             src="{{ URL::to('/') . '/public/images/trotoar.jpg' }}">
                     </div>
-                    <div class="col-md-6 col-sm-12 text-left align-self-end"><img
+                    <div class="col-md-6 col-sm-12 text-left align-self-end show-on-scroll" animate-delay="200"><img
                             class="img image-tentang image-tentang-small shadow mr-2 d-inline-flex"
                             src="{{ URL::to('/') . '/public/images/launching.jpg' }}">
                     </div>
-                    <div class="col-md-6 col-sm-12 text-right"><img
+                    <div class="col-md-6 col-sm-12 text-right show-on-scroll" animate-delay="300"><img
                             class="img image-tentang image-tentang-small shadow mr-2 d-inline-flex"
                             src="{{ URL::to('/') . '/public/images/petugas-dpu.jpg' }}"></div>
-                    <div class="col-md-6 col-sm-12"><img class="img image-tentang shadow mr-2 d-inline-flex"
+                    <div class="col-md-6 col-sm-12 show-on-scroll" animate-delay="400"><img class="img image-tentang shadow mr-2 d-inline-flex"
                             src="{{ URL::to('/') . '/public/images/jalan.jpeg' }}">
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-12">
+            <div class="col-md-5 col-sm-12 show-on-scroll">
                 <x-card class="p-3" title="Jalan Cantik">
                     Jalan cantik adalah aplikasi yang berfungsi untuk melaporkan kerusakan jalan dan jembatan yang berada di
                     wilayah provinsi jawa tengah. Aplikasi Jalan Cantik di bangun oleh DPU Bina Marga Cipta Karya Provinsi

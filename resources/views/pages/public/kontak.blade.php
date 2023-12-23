@@ -10,7 +10,7 @@
         <div class="title text-center mb-5">
             <h2>{{ $title }}</h2>
         </div>
-        <x-card class="p-3">
+        <x-card class="p-3 show-on-scroll">
             <div class="row">
                 <div class="col-6">
                     <table style="font-size:18px;" rowspacing="10" class="mb-4">

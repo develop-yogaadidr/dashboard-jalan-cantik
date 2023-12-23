@@ -5,6 +5,7 @@
 @section('navbar-content')
     <x-form action="{{ URL::to('/') }}/dashboard/laporan">
         <input type="hidden" name="selected_year" value="{{ $filter['selected_year'] }}">
+        <input type="hidden" name="selected_month" value="{{ $filter['selected_month'] }}">
         <input type="hidden" name="selected_kasus" value="{{ $filter['selected_kasus'] }}">
         <input type="hidden" name="selected_city" value="{{ $filter['selected_city'] }}">
         <input type="hidden" name="selected_status_jalan" value="{{ $filter['selected_status_jalan'] }}">

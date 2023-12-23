@@ -5,7 +5,7 @@
         <div class="title text-center mb-5">
             <h2>{{ $title }}</h2>
         </div>
-        <x-card class="p-3">
+        <x-card class="p-3 show-on-scroll">
             <div class="text-center mb-lg-4 mb-md-4 mb-sm-4 mb-4">
                 <div class="mb-3">
                     <small>Last updated: January 12, 2022</small>

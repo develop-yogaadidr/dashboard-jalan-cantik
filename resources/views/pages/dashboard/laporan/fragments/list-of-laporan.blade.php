@@ -1,7 +1,7 @@
 @include('pages.dashboard.laporan.fragments.filter-laporan')
 
 <div class="row">
-    <div class="col-3">
+    <div class="col-4">
         <div class="card shadow rounded">
             <div class="card-header" id="laporan-header">-</div>
             <div class="card-body p-0" id="list-of-laporan" style="max-height: calc(100vh - 300px);overflow-y: scroll;">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="col-9">
+    <div class="col-8">
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#detail">Detail Laporan</a>
@@ -110,14 +110,14 @@
 
             let startNumber = dataResponse.body.from;
             dataResponse.body.data.forEach((element, index) => {
-                let date = new Date(element['created_at']);
+                let date = dateToLocaleString(element['created_at']);
                 let slice = 100;
                 let description = element['info'].length > slice ?
                     element['info'].slice(0, slice) + " ..." :
                     element['info'];
 
                 content += `<div class="list-container daftar-laporan" data-id="${element.id}">
-                    <span class="chip float-right">Jalan Rusak</span>
+                    <span class="chip float-right" style="font-size:12px">${element['type']}</span>
                     <div class="mb-3">
                         <span class="title title-big title-primary">No Laporan ${element['id']}</span><br />
                         <span class="text-label">${date.toLocaleString()}</span>
@@ -155,6 +155,9 @@
 
         function generatePagination(dataResponse) {
             var nav = `<nav aria-label="Page navigation example"><ul class="pagination">`;
+            let side = "left";
+            let left = 0;
+            let right = 0;
 
             dataResponse.body.links.forEach((element) => {
                 var label = element.label == 'pagination.previous' ?
@@ -164,7 +167,6 @@
                     element.label;
 
                 var params = getUrlParams(element.url)
-
                 nav +=
                     `<li class="page-item"><button data-page="${params}" class="page-link ${params == "" ? 'disabled' : ''} ${dataResponse.body.current_page == label ? 'active' : ''} pagination-nav">${label}</button></li>`;
             });
@@ -233,11 +235,14 @@
         }
 
         function populateDetailLaporan(selected_data) {
-            let date = new Date(selected_data['created_at']);
+            let date = dateToLocaleString(selected_data['created_at']);
             let content = `<div class="d-inline-flex mb-4">
                         <div class="pr-4 mr-4" style="border-right: 1px solid #eaeaea">
                             <span class="title title-big title-primary">No Laporan ${selected_data['id']}</span><br />
                             <span class="text-label">${date.toLocaleString()}</span>
+                        </div>
+                        <div>
+                            <a href="{{ URL::to('/') }}/dashboard/laporan/${selected_data['id']}/download" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Download PDF</a>
                         </div>
                     </div>`;
 
@@ -283,7 +288,7 @@
 
         function populateProgressLaporan(selected_data) {
             let color = {
-                "Diterima": "secondary ",
+                "Diterima": "secondary",
                 "Ditolak": 'danger',
                 "Ditunda": 'warning',
                 "Proses Pengerjaan": 'info',
@@ -293,7 +298,7 @@
                 "status": "Diterima",
                 "date": selected_data['created_at'],
                 "updater": "Sistem",
-                "info": "Diterima oleh sistem",
+                "info": 'Diterima sistem.',
                 "color": color['Diterima'],
                 "images": ([selected_data['image1'], selected_data['image2'], selected_data['image3'],
                     selected_data['image4'], selected_data['image5'], selected_data['image6']
@@ -326,13 +331,13 @@
                             alt="${image}" />`
                 });
 
-                let date = new Date(element['date']);
+                let date = dateToLocaleString(element['date']);
                 content += `<div><div class="d-inline-flex mb-4">
                         <div class="mr-4 mt-2 text-bg-${element['color']}" style="width:12px;height:12px;border-radius:100%"></div>
                         <div>
                             <div class="mb-3">
                                 <span class="title title-big title-primary text-${element['color']}">${element['status']}</span><br />
-                                <span class="text-label">${date.toLocaleString()}</span><br />
+                                <span class="text-label">${date}</span><br />
                             </div>
                             <div class="mb-4">
                                 <span class="title title-big">${element['updater']}</span><br />

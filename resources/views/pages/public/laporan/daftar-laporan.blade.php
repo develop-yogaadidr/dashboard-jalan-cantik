@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#exampleModal"><i
+                    <button class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#modalFilter"><i
                             class="fas fa-filter"></i> Filter Laporan @if (isset($filter_counter) > 0)
                             <span class="badge bg-info">{{ $filter_counter }}</span>
                         @endif
@@ -28,27 +28,45 @@
                 </div>
             </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <!-- Modal Filter -->
+            <div class="modal fade" id="modalFilter" tabindex="-1" role="dialog" aria-labelledby="modalFilterLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <x-form>
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Filter Laporan</h5>
+                                <h5 class="modal-title" id="modalFilterLabel">Filter Laporan</h5>
                                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="status-jalan" class="form-label">Tahun Laporan</label>
-                                    <select class="form-control mb-2 mr-sm-2" name="selected_year">
-                                        @foreach ($list_of_data['years'] as $year)
-                                            <option {{ $year['value'] == $filter['selected_year'] ? 'selected' : '' }}
-                                                value="{{ $year['value'] }}">
-                                                {{ $year['label'] }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="status-jalan" class="form-label">Tahun Laporan</label>
+                                            <select class="form-control mb-2 mr-sm-2" name="selected_year">
+                                                @foreach ($list_of_data['years'] as $year)
+                                                    <option
+                                                        {{ $year['value'] == $filter['selected_year'] ? 'selected' : '' }}
+                                                        value="{{ $year['value'] }}">
+                                                        {{ $year['label'] }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="status-jalan" class="form-label">Bulan Laporan</label>
+                                            <select class="form-control mb-2 mr-sm-2" name="selected_month">
+                                                @foreach ($list_of_data['months'] as $month)
+                                                    <option
+                                                        {{ $month['value'] == $filter['selected_month'] ? 'selected' : '' }}
+                                                        value="{{ $month['value'] }}">
+                                                        {{ $month['label'] }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="mb-3">

@@ -25,6 +25,10 @@
             position: relative;
         }
 
+        .header-container{
+            max-width:960px;
+        }
+
         .header-image {
             width: 100vw;
             height: 100vh;
@@ -33,9 +37,8 @@
 
         .header-tagline {
             position: absolute;
-            top: 40%;
-            left: 35%;
-            transform: translate(-50%, -50%);
+            top: 25%;
+            left: 100px;
             max-width: 800px;
             color: #fff;
         }
@@ -90,30 +93,32 @@
     </style>
     <section class="header mb-5">
         <img class="header-image" src="{{ URL::to('/') . '/public/images/beranda.jpg' }}" alt="Five developers at work.">
-        <div class="header-tagline">
-            <p class="text-white font-weight-bold h2 mb-4 lh-base">Mari Kita Bangun Bersama Provinsi Jawa Tengah<br />
-                Dengan Melaporkan Jalan<br />
-                & Jembatan yang Rusak</p>
-            <a href="{{ URL::to('/') . '/kontak' }}" class="btn btn-danger btn-xl">Kontak Kami</a>
-        </div>
-        <div class="header-info">
-            <div class="header-info-content">
-                <img src="{{ URL::to('/') . '/public/images/mockups/home.png' }}">
-                <div style="position: absolute;width: 300px;top: 90px;left: 100px;">
-                    <h4 class="font-weight-bold h3">Jalan Cantik</h4>
-                    <p class="text-white mb-5 h5 lh-base">Aplikasi yang berfungsi untuk melaporkan kerusakan jalan dan
-                        jembatan
-                        di
-                        wilayah Provinsi Jawa Tengah</p>
-                    <a href="" class="btn btn-warning mr-2">Selengkapnya</a>
-                    <a href="{{ URL::to('/') . '/download' }}" class="btn btn-danger"><i class="fa fa-download"></i>
-                        Download</a>
+        <div class="header-container">
+            <div class="header-tagline show-on-scroll">
+                <p class="text-white font-weight-bold h2 mb-4 lh-base">Mari Kita Bangun Bersama Provinsi Jawa Tengah<br />
+                    Dengan Melaporkan Jalan<br />
+                    & Jembatan yang Rusak</p>
+                <a href="{{ URL::to('/') . '/kontak' }}" class="btn btn-danger btn-xl">Kontak Kami</a>
+            </div>
+            <div class="header-info">
+                <div class="header-info-content show-on-scroll">
+                    <img src="{{ URL::to('/') . '/public/images/mockups/home.png' }}">
+                    <div style="position: absolute;width: 300px;top: 90px;left: 100px;">
+                        <h4 class="font-weight-bold h3">Jalan Cantik</h4>
+                        <p class="text-white mb-5 h5 lh-base">Aplikasi yang berfungsi untuk melaporkan kerusakan jalan dan
+                            jembatan
+                            di
+                            wilayah Provinsi Jawa Tengah</p>
+                        <a href="" class="btn btn-warning mr-2">Selengkapnya</a>
+                        <a href="{{ URL::to('/') . '/download' }}" class="btn btn-danger"><i class="fa fa-download"></i>
+                            Download</a>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div>
     </section>
     <section class="map mb-4">
-        <div class="container">
+        <div class="container show-on-scroll">
             <div class="card shadow">
                 <div class="map-title shadow">Mari kita bangun bersama Provinsi Jawa Tengah</div>
                 <div class="callbacks_container">
@@ -124,7 +129,7 @@
         </div>
     </section>
     <section class="p-5">
-        <div class="container">
+        <div class="container show-on-scroll">
             <x-card class="p-5 text-center">
                 <div class="d-inline-flex mb-5">
                     <img src="{{ URL::to('/') . '/public/images/blog.png' }}" style="height:80px" class="mr-3">
@@ -147,7 +152,7 @@
         </div>
     </section>
     <section class="pb-5">
-        <div class="container">
+        <div class="container show-on-scroll">
             <x-card class="p-5 text-center">
                 <div class="d-inline-flex mb-5">
                     <div class="text-center h3 lh-base mb-4">Laporan Diterima AI</div>
