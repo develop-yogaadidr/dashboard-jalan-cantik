@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IntegrasiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
@@ -80,6 +81,19 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
         Route::get('/{id}', [RoadController::class, 'detail']);
     });
 
+    Route::prefix("kelola-integrasi")->group(function () {
+        Route::get('/', [IntegrasiController::class, 'index']);
+        Route::get('/{id}', [IntegrasiController::class, 'detail']);
+        Route::post('/create', [IntegrasiController::class, 'create']);
+        Route::post('/update', [IntegrasiController::class, 'update']);
+    });
+
+    Route::prefix("integrasi")->group(function () {
+        Route::get('/', [IntegrasiController::class, 'integrasi']);
+        Route::post('/regenerate-key', [IntegrasiController::class, 'regenerateKey']);
+        Route::post('/update', [IntegrasiController::class, 'integrasiUpdate']);
+    });
+
     Route::get('/daftar-user', [UserController::class, 'index']);
     Route::get('/daftar-user/admin', [UserController::class, 'getUserAdmin']);
     Route::get('/daftar-user/pelapor', [UserController::class, 'getUserPelapor']);
@@ -98,5 +112,6 @@ Route::prefix("dashboard")->middleware([EnsureSessionIsValid::class])->group(fun
         Route::get('/user/pelapor', [UserController::class, 'getUserDataPelapor']);
         Route::get('/level-admin', [UserController::class, 'getLevelAdminsData']);
         Route::get('/roads', [RoadController::class, 'getDataRoads']);
+        Route::get('/integrations', [IntegrasiController::class, 'gatDataIntegrasi']);
     });
 });

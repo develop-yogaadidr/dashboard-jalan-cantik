@@ -101,22 +101,58 @@ class UserService extends ServiceBase
 
         $repository = new UserRepository();
 
-        if($request->file('photo') != null){
+        if ($request->file('photo') != null) {
             $this->buildResponse($repository->updatePhoto($request));
         }
 
         $responseUpdateProfile = $this->buildResponse($repository->update($id, $dto));
-
         if ($responseUpdateProfile->ok()) {
-            $auth_service = new AuthService();
-            $profile = $auth_service->profile();
-
-            $name = explode(" ", $profile->body->name);
-            $profile->body->initial = ($name[0][0] ?? "") . ($name[1][0] ?? "");
-
-            $request->session()->put('profile', $profile->body);
+            $this->cacheProfileData($request);
         }
 
         return $responseUpdateProfile;
+    }
+
+    // Integrasi
+
+    public function updateMyIntegrationData(Request $request)
+    {
+        $dto = [
+            "name" => $request->name,
+            "description" => $request->description,
+            "callback_url" => $request->callback_url
+        ];
+
+        $repository = new UserRepository();
+        $responseDto = $this->buildResponse($repository->updateMyIntegrationData($dto));
+
+        if ($responseDto->ok()) {
+            $this->cacheProfileData($request);
+        }
+
+        return $responseDto;
+    }
+
+    public function regenerateMyApiKey(Request $request)
+    {
+        $repository = new UserRepository();
+        $responseDto = $this->buildResponse($repository->regenerateMyApiKey());
+
+        if ($responseDto->ok()) {
+            $this->cacheProfileData($request);
+        }
+
+        return $responseDto;
+    }
+
+    private function cacheProfileData(Request $request)
+    {
+        $auth_service = new AuthService();
+        $profile = $auth_service->profile();
+
+        $name = explode(" ", $profile->body->name);
+        $profile->body->initial = ($name[0][0] ?? "") . ($name[1][0] ?? "");
+
+        $request->session()->put('profile', $profile->body);
     }
 }

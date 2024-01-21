@@ -28,7 +28,7 @@ class BaseRepository implements IBaseRepository
 
     public function getDataById($id, $queryString = "")
     {
-        $response = Http::withToken($this->token)->get($this->base_url . '/' . $id . $queryString);
+        $response = Http::withToken($this->token)->get($this->base_url . '/' . $id . '?' . $queryString);
 
         return $response;
     }

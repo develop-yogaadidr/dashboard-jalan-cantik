@@ -28,8 +28,8 @@ class AuthController extends Controller
         }
 
         $users = [
-            "pimpinan" => [
-                "email" => "pimpinan@mail.com",
+            "admin_jaki" => [
+                "email" => "adminnasional@mail.com",
                 "password" => "Password2022"
             ],
             "admin_provinsi" => [

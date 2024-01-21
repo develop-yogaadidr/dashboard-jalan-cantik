@@ -55,6 +55,8 @@
                                     <button class="btn btn-warning mb-2 btn-sm" type="submit" name="role"
                                         value="admin_provinsi">Admin Provinsi</button>
                                     <button class="btn btn-warning mb-2 btn-sm" type="submit" name="role"
+                                        value="admin_jaki">Admin Nasional / JAKI</button>
+                                    <button class="btn btn-warning mb-2 btn-sm" type="submit" name="role"
                                         value="admin_kabupaten_kota">Admin Kota/Kabupaten</button>
                                 </div>
                             </x-form>

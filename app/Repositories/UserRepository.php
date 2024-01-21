@@ -30,4 +30,18 @@ class UserRepository extends BaseRepository
         
         return $response;
     }
+
+    public function updateMyIntegrationData($dto)
+    {
+        $response = Http::withToken($this->token)->put($this->base_url . '/me/integration/update', $dto);
+        
+        return $response;
+    }
+
+    public function regenerateMyApiKey()
+    {
+        $response = Http::withToken($this->token)->post($this->base_url . '/me/integration/regenerate-api-key');
+        
+        return $response;
+    }
 }

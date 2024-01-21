@@ -23,7 +23,7 @@
         @endif
 
         @foreach ($element['items'] as $item)
-            @if (in_array($profile->role, $item['roles']) || in_array('*', $item['roles']))
+            @if (in_array($profile->role, $item['roles']) || in_array('*', $item['roles']) || (in_array('Integrator', $item['roles']) && $profile->integrasi != null))
                 @if (array_key_exists('sub-items', $item))
                     @php
                         $isactive = false;

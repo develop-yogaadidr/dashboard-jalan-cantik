@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Dtos\RoadsRequestDto;
 use App\Repositories\RoadRepository;
 use Illuminate\Http\Request;
 
@@ -11,7 +10,7 @@ class RoadService extends ServiceBase
     public function getAll($queryString = "")
     {
         $repository = new RoadRepository();
-        $responseDto =$repository->getAllData($queryString)->object();
+        $responseDto = $repository->getAllData($queryString)->object();
 
         return $responseDto;
     }

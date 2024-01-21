@@ -391,6 +391,20 @@ return [
                     'icon' => 'fa-map',
                     'roles' => ['Admin Provinsi', 'Pimpinan']
                 ],
+                [
+                    'id' => 'kelola-integrasi',
+                    'name' => 'Kelola Integrasi',
+                    'target' => 'dashboard/kelola-integrasi',
+                    'icon' => 'fa-map',
+                    'roles' => ['Admin Provinsi']
+                ],
+                [
+                    'id' => 'integrasi',
+                    'name' => 'Integrasi',
+                    'target' => 'dashboard/integrasi',
+                    'icon' => 'fa-map',
+                    'roles' => ['Integrator']
+                ],
             ],
         ],
     ]
