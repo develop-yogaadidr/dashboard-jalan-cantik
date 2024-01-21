@@ -16,7 +16,7 @@
                 @php
                     $ip_whitelist = '';
                     foreach ($data->integrasi->ip_whitelist as $ip) {
-                        $ip_whitelist .= $ip_whitelist == '' ? $ip->ip_address : ',' . $ip->ip_address;
+                        $ip_whitelist .= $ip_whitelist == '' ? $ip->ip_address : ';' . $ip->ip_address;
                     }
                 @endphp
                 <x-forms.input name="name" type="text" label="Nama" value="{{ $data->integrasi->name }}" />
