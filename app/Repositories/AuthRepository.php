@@ -21,7 +21,7 @@ class AuthRepository extends BaseRepository
 
     public function profile()
     {
-        $response = Http::withToken($this->token)->get($this->base_url . '/profile?join=integrasi');
+        $response = Http::withToken($this->token)->get($this->base_url . '/profile?join=integrasi.ip_whitelist');
 
         return $response;
     }

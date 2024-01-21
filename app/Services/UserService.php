@@ -120,7 +120,8 @@ class UserService extends ServiceBase
         $dto = [
             "name" => $request->name,
             "description" => $request->description,
-            "callback_url" => $request->callback_url
+            "callback_url" => $request->callback_url,
+            "ip_whitelist" => $request->ip_whitelist
         ];
 
         $repository = new UserRepository();
