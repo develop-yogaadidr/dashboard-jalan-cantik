@@ -400,7 +400,7 @@ return [
                 ],
                 [
                     'id' => 'integrasi',
-                    'name' => 'Integrasi',
+                    'name' => 'Setting Integrasi',
                     'target' => 'dashboard/integrasi',
                     'icon' => 'fa-map',
                     'roles' => ['Integrator']
