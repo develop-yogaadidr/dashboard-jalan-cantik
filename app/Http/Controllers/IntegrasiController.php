@@ -80,7 +80,7 @@ class IntegrasiController extends Controller
             ]
         ];
 
-        return view('pages.dashboard.integrasi.integrasi', ["title" => "Integrasi",  'breadcrumbs' => $breadcrumbs, "active_menu" => "integrasi", "data" => session("profile")]);
+        return view('pages.dashboard.integrasi.integrasi', ["title" => "Setting Integrasi",  'breadcrumbs' => $breadcrumbs, "active_menu" => "integrasi", "data" => session("profile")]);
     }
 
     public function integrasiUpdate(Request $request)
