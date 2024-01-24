@@ -47,7 +47,7 @@ class PublicController extends Controller
     public function detailLaporanMasuk(Request $request, $id)
     {
         $service = new ReportService;
-        $queryString = "join=user,city,progress.updater";
+        $queryString = "join=user,city,progress.updater,integrasi";
         $response = $service->getById($id, $queryString);
 
         return view('pages.public.laporan.detail-laporan', ["title" => "Detail Laporan", "data" => $response]);

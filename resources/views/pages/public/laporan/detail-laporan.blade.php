@@ -32,7 +32,7 @@
                         <table class="table table-borderless">
                             <tr>
                                 <td valign="top" width="150">Pelapor</td>
-                                <td>: {{ $data->body->user->name }}</td>
+                                <td>: {{ $data->body->integrasi->nama_pelapor == null ? $data->body->user->name : $data->body->integrasi->nama_pelapor }}</td>
                             </tr>
                             <tr>
                                 <td>Email</td>

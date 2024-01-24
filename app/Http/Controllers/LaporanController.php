@@ -54,7 +54,7 @@ class LaporanController extends Controller
             return redirect()->back()->with('warning', $response->message);
         }
 
-        return redirect(session('link-laporan') . '?' . session('link-laporan-querystring'))->with('success', "Laporan berhasil diperbarui");
+        return redirect('/dashboard/laporan?selected_status=' . $status)->with('success', "Laporan berhasil diperbarui");
     }
 
     public function statusJalan(Request $request)

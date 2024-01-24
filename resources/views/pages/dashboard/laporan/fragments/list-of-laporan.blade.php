@@ -249,7 +249,7 @@
             content += `<table class="table table-borderless">
                         <tr>
                             <td valign="top" width="150">Pelapor</td>
-                            <td>: ${selected_data['user']['name']}</td>
+                            <td>: ${selected_data['users.name']}</td>
                         </tr>
                         <tr>
                             <td>Email</td>
