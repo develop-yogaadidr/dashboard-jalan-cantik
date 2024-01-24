@@ -13,7 +13,7 @@ class LaporanController extends Controller
     public function detailLaporan(Request $request, $id)
     {
         $service = new ReportService;
-        $queryString = "?join=user,city,progress";
+        $queryString = "join=user,city,progress";
         $response = $service->getById($id, $queryString);
 
         return view('pages.dashboard.laporan.detail-laporan', ["title" => "Laporan Detail", "active_menu" => "laporan-masuk", "data" => $response]);
@@ -31,7 +31,7 @@ class LaporanController extends Controller
             ],
             [
                 "label" => 'Laporan',
-                'link' => '/dashboard/laporan?' . session('link-laporan-querystring')
+                'link' => '/dashboard/laporan?selected_status=' . $status
             ],
             [
                 "label" => 'Proses Laporan',
@@ -142,7 +142,7 @@ class LaporanController extends Controller
         $filter = $this->populateFilter($request);
         $service = new ReportService;
         $filter_image = $request['with_image'] == "on" ? "&with_image=true" : "";
-        $queryString = "?join=user,city" . $filter['year'] . $filter['month'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'] . $filter_image;
+        $queryString = "join=user,city" . $filter['year'] . $filter['month'] . $filter['city'] . $filter['status'] . $filter['kasus'] . $filter['status_jalan'] . $filter_image;
         $response = $service->download($queryString);
 
         return $response;
@@ -151,15 +151,12 @@ class LaporanController extends Controller
     public function downloadDetailAsPdf(Request $request, $id)
     {
         $service = new ReportService;
-        $queryString = "?join=user,city,progress";
+        $queryString = "join=user.integrasi,city,progress";
         $response = $service->getById($id, $queryString);
         $url = URL::to('/') . '/laporan-masuk/' . $id;
 
         $pdf = Pdf::loadView('pdf/detail-laporan', ["data" => $response, "url" => $url]);
         return $pdf->download("Detail Laporan " . $id . ".pdf");
-
-
-        return view('pdf/detail-laporan', ["data" => $response, "url" => $url]);
     }
 
     // Data Purposes

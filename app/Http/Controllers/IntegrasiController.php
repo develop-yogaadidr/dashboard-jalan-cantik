@@ -29,7 +29,7 @@ class IntegrasiController extends Controller
     public function detail(Request $request, $id)
     {
         $service = new IntegrationService;
-        $response = $service->getById($id, "join=user");
+        $response = $service->getById($id, "?join=user");
 
         $breadcrumbs = [
             [
