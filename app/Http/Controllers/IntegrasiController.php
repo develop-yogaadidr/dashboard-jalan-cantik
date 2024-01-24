@@ -75,7 +75,7 @@ class IntegrasiController extends Controller
                 'link' => '/dashboard'
             ],
             [
-                "label" => 'Integrasi',
+                "label" => 'Setting Integrasi',
                 'link' => ''
             ]
         ];
